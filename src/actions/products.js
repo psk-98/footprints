@@ -1,7 +1,7 @@
 import axios from "axios"
 import { GET_PRODUCT, GET_PRODUCTS, UPDATE_CATEGORY, UPDATE_FILTERS, UPDATE_PANEL } from "./types"
 
-const BASE_URL = 'http://127.0.0.1:8000/api'
+const BASE_URL = 'https://footprintz.herokuapp.com/api'
 
 export const getProduct = (url) => (dispatch, getState) => {
     axios.get(`${BASE_URL}${url}`)
