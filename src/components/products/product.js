@@ -128,9 +128,10 @@ class Product extends Component {
         if (productStock.length !== 0)
         {
            theReturn =  productStock.map(stock => {
+                    
                     return (
                         <>
-                            <li key={stock.size} className={this.state.[stock.size] ? 'size-option active': 'size-option'} 
+                            <li key={stock.size} className={this.state[stock.size] ? 'size-option active': 'size-option'} 
                                 onClick={() => this.handleSizes(stock.size)}>
                                 {stock.size}
                             </li>
