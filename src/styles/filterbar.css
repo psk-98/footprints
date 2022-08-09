@@ -63,7 +63,7 @@ nav.panel-open {
 }
 .open {
     display: flex;
-    opacity: 100%;
+    opacity: 1;
 }
 .price-filter-options input{
     width: 100px;
