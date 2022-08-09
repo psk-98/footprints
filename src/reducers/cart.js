@@ -34,7 +34,7 @@ export default function(state = initState, action) {
             else {
                 let check = false
                 state.cart.map((item, key) => {
-                    if(item.id === action.payload.product.id && item.size == action.payload.size) {
+                    if(item.id === action.payload.product.id && item.size === action.payload.size) {
                         state.cart[key].quantity++
                         check=true
                     }

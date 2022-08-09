@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Link } from "react-router-dom";
 import {getProduct} from '../../actions/products'
 import {addCart} from '../../actions/cart'
 
@@ -13,6 +12,7 @@ class Product extends Component {
         product: PropTypes.object.isRequired,
         getProduct: PropTypes.func.isRequired,
         addCart: PropTypes.func.isRequired,
+        loading: PropTypes.object.isRequired,
     }
 
     state = {
@@ -55,8 +55,6 @@ class Product extends Component {
         else console.log('select size')
         
     }
-
-    //handleSize = (e) => this.setState({size: e.target.id})
 
     handleSizes = (size) => {
         this.setState ({
@@ -147,12 +145,11 @@ class Product extends Component {
                     </div>
                 </>
         }
-        console.log(theReturn)
         return theReturn
     }
  
     handleImgs = () => {
-        const {productImages, productStock, category} = this.props.product
+        const {productImages} = this.props.product
         return (
             productImages.map(image => {
                 return (
@@ -231,7 +228,8 @@ class Product extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    product: state.products.product
+    product: state.products.product,
+    loading: state.products.loading
 })
 
 export default  connect(mapStateToProps, {getProduct, addCart}) (Product)

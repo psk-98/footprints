@@ -1,4 +1,4 @@
-import { GET_PRODUCT, GET_PRODUCTS, UPDATE_FILTERS, UPDATE_PANEL, UPDATE_CATEGORY } from "../actions/types";
+import { GET_PRODUCT, GET_PRODUCTS, UPDATE_FILTERS, UPDATE_PANEL, UPDATE_CATEGORY, LOADING } from "../actions/types";
 
 const initState = {
     products: [],
@@ -13,7 +13,8 @@ const initState = {
     sizeList: [],
     sort: '-date_added',
     panelStatus: false,
-    category: null
+    category: null,
+    loading: false
 }
 
 export default function(state = initState, action) {
@@ -34,19 +35,27 @@ export default function(state = initState, action) {
                 products: action.payload.results,
                 prevPage: action.payload.previous,
                 nextpage: action.payload.next,
-                numProducts: action.payload.count
+                numProducts: action.payload.count,
+                loading: false
             }
         case UPDATE_FILTERS:
             return {
                 ...state,
                 sort: action.payload.sort,
                 sizeList: action.payload.sizeList,
-                panelStatus: action.payload.panelStatus
+                panelStatus: action.payload.panelStatus,
+                loading: false
+                
             }
         case UPDATE_CATEGORY:
             return {
                 ...state,
                 category: action.payload
+            }
+        case LOADING:
+            return {
+                ...state,
+                loading: true
             }
         default:
             return state

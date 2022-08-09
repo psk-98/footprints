@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { Link } from "react-router-dom";
 import {getFilteredProducts, getNewPage, updatePanelStatus, updateCategory} from '../../actions/products'
 import Filterbar from './filterbar';
+import Loader from '../common/loader';
 
 
 class Product extends Component {
@@ -23,7 +24,6 @@ class Product extends Component {
     }
 
     handleAddCart = (product) => {
-        console.log(product)
         this.props.addCart(product)
     }
 
@@ -67,18 +67,15 @@ class Product extends Component {
     handlePageChange = (url) => this.props.getNewPage(url)
 
     componentDidMount() {
-        const {getFilteredProducts, match} = this.props
+        const {getFilteredProducts} = this.props
 
         const {catSlug} = this.props.match.params
-        console.log(catSlug)
         switch (catSlug) {
             case 'women':
                 this.props.updateCategory('Women')
-                //getFilteredProducts()
                 break;
             case 'men':
                 this.props.updateCategory('Men')
-                //getFilteredProducts()
                 break;
             default:
                 console.log('said null')
@@ -95,15 +92,12 @@ class Product extends Component {
         if (prevProps.match.params !== this.props.match.params) 
         {
             const {catSlug} = this.props.match.params
-            console.log(catSlug)
             switch (catSlug) {
                 case 'women':
                     this.props.updateCategory('Women')
-                    //getFilteredProducts()
                     break;
                 case 'men':
                     this.props.updateCategory('Men')
-                    //getFilteredProducts()
                     break;
                 default:
                     console.log('said null')
@@ -115,14 +109,14 @@ class Product extends Component {
     }
 
     render () {
-        const {products, nextpage, prevPage, numProducts, panelStatus} = this.props.products
+        const {products, nextpage, prevPage, numProducts, panelStatus, loading} = this.props.products
         
         const prevDetails = this.handlePrev()
 
         const nextDetails = this.handleNext() 
 
-
-        const productList = products ? (
+        const productLists =  loading ? (<Loader/>)
+        :(
             products.map(product => {
                 return (
                     <div className='card-wrapper'>
@@ -143,7 +137,7 @@ class Product extends Component {
                     </div>
                 )
             })
-        ):(<></>)
+        )
 
         return (
             <>
@@ -171,7 +165,7 @@ class Product extends Component {
                     </div>
                 </div>
                 <div className='products-wrapper'>
-                    {productList}
+                    {productLists}
                 </div>
                 <div className='pagination-wrapper'>
                     <nav className='pagination-nav'>

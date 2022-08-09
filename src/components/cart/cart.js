@@ -52,7 +52,7 @@ class Cart extends Component {
     }
 
     handleDecrease = (index) => {
-        const {cart, numberCart} = this.props.cart
+        const {cart} = this.props.cart
         if (cart[index].quantity > 1)
         {
             this.props.decreaseQuantity(index)
@@ -65,7 +65,7 @@ class Cart extends Component {
     
 
     render () {
-        const {increaseQuantity, decreaseQuantity, deleteCart} = this.props
+        const {increaseQuantity, decreaseQuantity} = this.props
 
         const {cart, numberCart} = this.props.cart
 

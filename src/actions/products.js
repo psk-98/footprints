@@ -1,9 +1,13 @@
 import axios from "axios"
-import { GET_PRODUCT, GET_PRODUCTS, UPDATE_CATEGORY, UPDATE_FILTERS, UPDATE_PANEL } from "./types"
+import { GET_PRODUCT, GET_PRODUCTS, UPDATE_CATEGORY, UPDATE_FILTERS, UPDATE_PANEL, LOADING } from "./types"
 
 const BASE_URL = 'https://footprintz.herokuapp.com/api'
 
 export const getProduct = (url) => (dispatch, getState) => {
+    dispatch({
+        type: LOADING,
+        payload: true
+    })
     axios.get(`${BASE_URL}${url}`)
     .then(res => {
         dispatch({
@@ -15,6 +19,10 @@ export const getProduct = (url) => (dispatch, getState) => {
 }
 
 export const getProducts = (page) => (dispatch, getState) => {
+    dispatch({
+        type: LOADING,
+        payload: true
+    })
     axios.get(`${BASE_URL}/latest-products/?page${page}&page_size=10`)
     .then(res => {
         dispatch({
@@ -26,6 +34,10 @@ export const getProducts = (page) => (dispatch, getState) => {
 }
 
 export const getFilteredProducts = () => (dispatch, getState) => {
+    dispatch({
+        type: LOADING,
+        payload: true
+    })
     const {sizeList, pageSize, sort, category} = getState().products
     console.log(getState())
     let params = {}
@@ -55,7 +67,10 @@ export const getFilteredProducts = () => (dispatch, getState) => {
 }
 
 export const getNewPage = (url) => (dispatch, getState) => {
-    console.log(url)
+    dispatch({
+        type: LOADING,
+        payload: true
+    })
     axios.get(`${url}`)
     .then(res => {
         dispatch({

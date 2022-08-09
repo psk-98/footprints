@@ -1,17 +1,11 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import { Link } from "react-router-dom";
 import sneakers from '../../styles/sneakers.webp'
 
 class Home extends Component {
 
-    state = {
-    }
-
-    static propTypes = {
-    }
-
+    
     render () {
 
         return (

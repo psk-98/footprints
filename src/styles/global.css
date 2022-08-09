@@ -27,3 +27,11 @@ background: #555;
     margin: 10vh 25px 0 25px;
     text-transform: uppercase;
 }
+
+.loader {
+    width: 10px;
+    height: 10px;
+    margin: 40px auto;
+    border-radius: 50%;
+    background: #000;
+}
