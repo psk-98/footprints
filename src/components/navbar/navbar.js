@@ -1,7 +1,13 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 class Navbar extends Component {
+
+    static propTypes = {
+        numberCart: PropTypes.object.isRequired,
+    }
 
     state = {
         toggle: false,
@@ -14,9 +20,33 @@ class Navbar extends Component {
         })
     }
 
+    handleCartIcon = () => {
+        
+        
+        if (this.props.numberCart > 0)
+        {
+            return (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox='0 0 48 48' height="21" >
+                    <path d="M8 44V12h8.5v-.5q0-3.15 2.175-5.325Q20.85 4 24 4q3.15 0 5.325 2.175Q31.5 8.35 31.5 11.5v.5H40v32ZM24 7q-1.9 0-3.2 1.3-1.3 1.3-1.3 3.2v.5h9v-.5q0-1.9-1.3-3.2Q25.9 7 24 7Zm-7.5 14h3v-6h-3Zm12 0h3v-6h-3Z"/>
+                </svg>
+            )
+        }
+        else 
+        {
+            return (
+                <svg xmlns="http://www.w3.org/2000/svg" height="21" width="21" viewBox='0 0 48 48' fill='#000'>
+                    <path d="M9 43V13h7.85v-.85q0-3 2.075-5.075T24 5q3 0 5.075 2.075t2.075 5.075V13H39v30Zm10.15-30.85V13h9.7v-.85q0-2.05-1.4-3.475Q26.05 7.25 24 7.25q-2.05 0-3.45 1.425-1.4 1.425-1.4 3.475Zm-7.9 28.6h25.5v-25.5h-5.6v6h-2.3v-6h-9.7v6h-2.3v-6h-5.6Zm0 0v-25.5Z"/>
+                </svg>
+            )
+        }
+    }
+
     
 
     render () {
+
+        const cartIcon = this.handleCartIcon()
+
         return (
             <>
                 
@@ -53,9 +83,7 @@ class Navbar extends Component {
                                     </li>
                                     <li className="nav-item-top">
                                         <Link to='/cart' className='nav-link-top'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="21" width="21" viewBox='0 0 48 48'>
-                                            <path d="M9 43V13h7.85v-.85q0-3 2.075-5.075T24 5q3 0 5.075 2.075t2.075 5.075V13H39v30Zm10.15-30.85V13h9.7v-.85q0-2.05-1.4-3.475Q26.05 7.25 24 7.25q-2.05 0-3.45 1.425-1.4 1.425-1.4 3.475Zm-7.9 28.6h25.5v-25.5h-5.6v6h-2.3v-6h-9.7v6h-2.3v-6h-5.6Zm0 0v-25.5Z"/>
-                                        </svg>
+                                            {cartIcon}
                                         </Link>
                                     </li>
                                 </ul>
@@ -104,4 +132,8 @@ class Navbar extends Component {
     }
 }
 
-export default  Navbar
+const mapStateToProps = (state) => ({
+    numberCart: state.cart.numberCart,
+})
+
+export default  connect(mapStateToProps) (Navbar)
