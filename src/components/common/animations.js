@@ -15,3 +15,16 @@ export const loaderVariants = {
       }
     }
   }
+
+export const alertVariants = {
+  hidden: {
+    x: '100vw'
+  },
+  visible: {
+    x: 0,
+    transition: {type: 'spring', delay: 0.5}
+  },
+  exit: {
+    x: '100vw'
+  }
+}
