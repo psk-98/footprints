@@ -1,23 +1,6 @@
 import React from 'react';
 import { motion } from "framer-motion/dist/framer-motion";
-
-const loaderVariants = {
-  animationOne: {
-    x: [-20, 20],
-    y: [0, -30],
-    transition: {
-      x: {
-        yoyo: Infinity,
-        duration: 0.5,
-      },
-      y: {
-        yoyo: Infinity,
-        duration: 0.25,
-        ease: 'easeOut'
-      }
-    }
-  }
-};
+import { loaderVariants } from './animations';
 
 const Loader = () => {
   return (

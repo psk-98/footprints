@@ -23,6 +23,9 @@ import './styles/product.css'
 import './styles/filterbar.css'
 import './styles/cart.css'
 import './styles/checkout.css'
+import './styles/alerts.css'
+
+import Alerts from './components/common/alertsWrapper';
 
 
 ReactDOM.render(
@@ -40,6 +43,7 @@ ReactDOM.render(
               <Route exact path='/checkout' component={Checkout} /> 
             </Switch>
           </div>
+          <Alerts/>
           <Navbar/>
         </Router> 
     </PersistGate>

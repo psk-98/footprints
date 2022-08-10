@@ -13,3 +13,7 @@ export const UPDATE_CART = 'UPDATE_CART';
 export const DELETE_CART = 'DELETE_CART';
 
 export const LOADING = 'LOADING'
+
+export const GET_ERRORS = 'GET_ERRORS'
+export const CREATE_MESSAGE = 'CREATE_MESSAGE'
+export const CHANGE_SHOW = 'CHANGE_SHOW' 

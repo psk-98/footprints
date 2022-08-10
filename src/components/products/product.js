@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import {getProduct} from '../../actions/products'
 import {addCart} from '../../actions/cart'
-
+import { returnErrors } from '../../actions/errors'
 
 
 class Product extends Component {
@@ -11,6 +11,7 @@ class Product extends Component {
     static propTypes = {
         product: PropTypes.object.isRequired,
         getProduct: PropTypes.func.isRequired,
+        returnErrors: PropTypes.func.isRequired,
         addCart: PropTypes.func.isRequired,
         loading: PropTypes.object.isRequired,
     }
@@ -52,7 +53,16 @@ class Product extends Component {
             }
             this.props.addCart(productOb)
         }
-        else console.log('select size')
+        else{
+            const msg = {
+                msg: {addSize: "select a size"},
+                status: null
+            }
+            this.props.returnErrors({addSize: "select a size"}, null)
+
+
+            console.log('select size')
+        } 
         
     }
 
@@ -232,4 +242,4 @@ const mapStateToProps = (state) => ({
     loading: state.products.loading
 })
 
-export default  connect(mapStateToProps, {getProduct, addCart}) (Product)
+export default  connect(mapStateToProps, {getProduct, addCart, returnErrors}) (Product)
