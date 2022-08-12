@@ -28,7 +28,7 @@ class Alertswrapper extends Component {
 
         setTimeout(() => {
             changeShow(false)    
-        }, 1000)
+        }, 10000)
 
     }
 
