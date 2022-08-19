@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { increaseQuantity, decreaseQuantity, deleteCart} from '../../actions/cart'
 
 
@@ -12,6 +12,13 @@ class Cart extends Component {
         increaseQuantity: PropTypes.func.isRequired, 
         decreaseQuantity: PropTypes.func.isRequired, 
         deleteCart: PropTypes.func.isRequired,
+        accounts: PropTypes.object.isRequired
+    }
+
+    state = {
+        redirect: false,
+        showModal: false,
+        isEmpty: false
     }
 
     handleTotalPrice = () => {
@@ -62,15 +69,67 @@ class Cart extends Component {
         }
     }
 
-    
+    handleCartCheck = () => {
+        const {cart, numberCart} = this.props.cart
+        if (cart.length === 0 || numberCart === 0) return true
+
+        return false
+    }
+
+    handleToCheckout = () => {
+        
+        if (this.props.accounts.isAuthenticated)
+        {
+            this.setState({
+                redirect: true,
+                showModal: false
+            })            
+        }
+        else {
+            this.setState({
+                showModal: true,
+                redirect: false
+            })
+        }
+    }
 
     render () {
         const {increaseQuantity, decreaseQuantity} = this.props
 
         const {cart, numberCart} = this.props.cart
 
+        const isEmpty = this.handleCartCheck()
 
-        const cartItems = cart ? (
+        if (this.state.redirect) return <Redirect to='/checkout' />
+
+        const modal = this.state.showModal ? (
+            <>
+                <div className='modal-wrapper'>
+                    <div className='modal'>
+                        <button>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="21" viewBox='0 0 48 48' onClick={() => this.setState({showModal:false})}>
+                                <path d="m12.45 37.65-2.1-2.1L21.9 24 10.35 12.45l2.1-2.1L24 21.9l11.55-11.55 2.1 2.1L26.1 24l11.55 11.55-2.1 2.1L24 26.1Z"/>
+                            </svg>
+                        </button>
+                        <Link to="/login">
+                            <div className='auth-btn'>
+                                Login
+                            </div>
+                        </Link>
+                        {
+                            <Link to='/checkout'>
+                                <div className='guest-btn' aria-disabled>
+                                    Guest checkout
+                                </div>
+                            </Link>
+                        }
+                    </div>
+                    
+                </div>
+            </>
+        ):(<></>)
+
+        const cartItems = isEmpty ? (<div className='empty-msg'> your Bag is empty</div>):(
             cart.map(product => {
                 return (
                     <>
@@ -104,7 +163,7 @@ class Cart extends Component {
                                     <div className='price-details'>
                                         {this.handlePriceDetails(product)}
                                     </div>
-                                    <div className='delete-item'>
+                                    <div className='delete-item' onClick={() => this.props.deleteCart(cart.indexOf(product))}>
                                         delete
                                     </div>
                                 </div>
@@ -113,10 +172,11 @@ class Cart extends Component {
                     </>
                 )
             })
-        ):(<></>)
+        )
 
         return (
             <>
+                {modal}
                 <div className='cart-wrapper'>
                     <div className='cart-top'>
                         <div className='cart-heading'>Bag</div>
@@ -134,18 +194,19 @@ class Cart extends Component {
                         {cartItems}
                     </div>
                 </div>
-                <Link to='/checkout' >
-                    <div className='checkout-btn'>
+                { isEmpty ? (<></>):
+                    <div className='checkout-btn' onClick={() => this.handleToCheckout()}>
                         Checkout
                     </div>
-                </Link>
+                }
             </>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-    cart: state.cart
+    cart: state.cart,
+    accounts: state.accounts
 })
 
 export default  connect(mapStateToProps, {increaseQuantity, decreaseQuantity, deleteCart}) (Cart)

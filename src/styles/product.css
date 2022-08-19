@@ -56,8 +56,11 @@
     text-align: center;
     font-size: 14px;
     width: 20%;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
 }
 .add-cart-btn{
+    cursor: pointer;
     background: #000;
     color: #fafafa;
     width: 60%;
@@ -106,7 +109,7 @@
         height: 90vh;
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;
+        justify-content: flex-start;
     }
     .product-details div {
         margin: 0 0 20px 0;

@@ -8,20 +8,31 @@ class Filterbar extends Component {
 
     state = {
         toggleSort: false,
+        togglePrice: false,
         toggleSize: false,
-        XS: false,
-        S: false,
-        M: false,
-        L: false,
-        XL: false,
         sizeList: null,
         sort: '-date_added',
+        fromPrice: '',
+        toPrice: '',
         priceAsc: false,
         priceDesc: false,
         aToZ: false,
         zToA: false,
         newest: false,
-        oldest: false
+        oldest: false,
+        UK3: {isActive: false, name: 3},
+        UK4: false,
+        UK5: false,
+        UK6: false,
+        UK7: false,
+        UK8: false,
+        UK9: false,
+        UK10: false,
+        UK11: false,
+        UK12: false,
+        UK13: false,
+        UK14: false,
+        UK15: false,
     }
 
     static propTypes = {
@@ -31,12 +42,21 @@ class Filterbar extends Component {
     }
 
     handleFilter = () => {
+        const {fromPrice, toPrice, sizeList, sort} = this.state
         let payload = {
-            sizeList: this.state.sizeList,
-            sort: this.state.sort,
+            sizeList: sizeList,
+            sort: sort,
             panelStatus: false
         }
+        if (fromPrice !== null || fromPrice !== '' ) payload.fromPrice = fromPrice
+        if (toPrice !== null || toPrice !== '') payload.toPrice = toPrice
         this.props.updateFilters(payload)
+        this.setState({
+            sizeList: null,
+            sort: '-date_added',
+            fromPrice: '',
+            toPrice: '',
+        })
         this.props.getFilteredProducts()
     }
 
@@ -44,9 +64,9 @@ class Filterbar extends Component {
 
     handleChange = (e) => this.setState({[e.target.name]: e.target.value})
 
-    handleToggleSize = () => {
+    handleTogglePrice = () => {
         this.setState({
-            toggleSize: !this.state.toggleSize
+            togglePrice: !this.state.togglePrice
         })
     }
 
@@ -56,7 +76,15 @@ class Filterbar extends Component {
         })
     }
 
+    handleToggleSize = () => {
+        this.setState({
+            toggleSize: !this.state.toggleSize
+        })
+    }
+
     handleStyle = (name,value) => {
+        console.log(name)
+        console.log(value)
         let temp = []
         if (this.state.sizeList === null)
         {
@@ -69,9 +97,11 @@ class Filterbar extends Component {
         }
         
         this.setState({
-            [name]: !value,
+            [name]: {isActive:!value, name: 3},
             sizeList: temp
         })
+        console.log(this.state.[name])
+
     }
 
     handleReset = () => {
@@ -104,7 +134,9 @@ class Filterbar extends Component {
 
         const {panelStatus} = this.props.filters
 
+        const { UK4, UK5, UK6, UK7, UK8, UK9, UK10, UK11, UK12, UK13, UK14, UK15} = this.state
 
+        const UK3 = "3"
         return (
             <nav className={panelStatus ? 'filter-panel panel-open' : 'filter-panel'} >
                 <div className='filters-wrappers'>
@@ -143,7 +175,31 @@ class Filterbar extends Component {
                                     onClick={() => this.handleStyle('XL',this.state.XL)}>
                                     XL
                                 </li>
+                                <li className={UK3 ? 'size-option active': 'size-option'} 
+                                    onClick={() => this.handleStyle('3',UK3.isActive)}>
+                                    3
+                                </li>
                             </ul>
+                        </div>
+                    </div>
+                    <div className='price-filter'>
+                        <div className='expand-control'>
+                            <span>Price</span>
+                            <button onClick={() => this.handleTogglePrice()}>
+                                {this.state.togglePrice ? <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20">
+                                                                <path d="M5.083 10.583V9.375h9.834v1.208Z"/>
+                                                            </svg> : 
+                                                            <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20">
+                                                                <path d="M9.396 14.875v-4.292H5.104V9.375h4.292V5.083h1.208v4.292h4.292v1.208h-4.292v4.292Z"/>
+                                                            </svg>
+                                }       
+                            </button>
+                        </div>
+                        <div className={this.state.togglePrice ? 'price-filter-options open' : 'price-filter-options closed'}>
+                                <input type='number' name='fromPrice' step="0.01" min="0"
+                                value={this.state.fromPrice} placeholder="from" onChange={this.handleChange}/>
+                                <input type='text' name='toPrice' placeholder="to"
+                                value={this.state.toPrice} step="0.01" min="0" onChange={this.handleChange}/>
                         </div>
                     </div>
                     <div className='sort-by'>
@@ -180,6 +236,7 @@ class Filterbar extends Component {
                             </ul>
                         </div>
                     </div>
+
                     <div className='action-btns'>
                         <button className='apply-btn' onClick={()=>this.handleFilter()}>
                             View results

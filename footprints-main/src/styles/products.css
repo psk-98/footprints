@@ -1,0 +1,94 @@
+.pv-heading-wrapper {
+    margin: 15px 0;
+    font-size: 30px;
+    font-weight: 500;
+}
+.settings-wrapper {
+    display: flex;
+    font-size: 14px;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+.panel-open .sort-filter span, .panel-open  .sort-filter svg{
+    stroke: #000;
+    color: #000;
+}
+.sort-filter svg {
+    width: 20px;
+    stroke: #7a7a7a;
+}
+.sort-filter span, .num-show span {
+    margin: 0 5px;
+    color: #7a7a7a;
+}
+.sort-filter {
+    cursor: pointer;
+}
+.sort-filter, .num-show {
+    display: flex;
+    align-items: center;
+}
+.products-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.card-wrapper {
+    min-width: 47%;
+    width: 47%;
+    font-size: 13px;
+    max-width: 47%;
+    margin: 8px 0;
+}
+.card-img, .card-img img {
+    width: 100%;
+}
+.card-product-name, .product-price{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.product-price span{
+    color: #7a7a7a;
+}
+.card-wrapper span {
+    font-size: 13px;
+}
+.pagination-wrapper {
+    margin: 15px 0;
+}
+.pagination-list {
+    display: flex;
+    justify-content: center;
+}
+.pagination-item {
+    list-style: none;
+    margin: 0 20px;
+    font-size: 14px;
+}
+.pagination-item svg {
+    height: 20px;
+    opacity: 0;
+}
+.active svg{
+    opacity: 1;
+}
+
+@media (min-width: 768px) {
+    .card-wrapper {
+        min-width: 30%;
+        width: 30%;
+        max-width: 30%;
+    }
+    .pagination-item svg {
+        height: 30px;
+    }
+
+}
+@media (min-width: 1024px) {
+    .card-wrapper {
+        min-width: 24%;
+        width: 24%;
+        max-width: 24%;
+    }
+}

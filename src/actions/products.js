@@ -1,15 +1,17 @@
 import axios from "axios"
-import { GET_PRODUCT, GET_PRODUCTS, UPDATE_CATEGORY, UPDATE_FILTERS, UPDATE_PANEL, LOADING } from "./types"
+import { BASE_URL, GET_PRODUCT, GET_PRODUCTS, UPDATE_CATEGORY, UPDATE_FILTERS, UPDATE_PANEL, LOADING, UPDATE_SEARCH } from "./types"
 
-const BASE_URL = 'https://footprintz.herokuapp.com/api'
 
-export const getProduct = (url) => (dispatch, getState) => {
+export const getProduct = (slug) => (dispatch, getState) => {
     dispatch({
         type: LOADING,
         payload: true
     })
-    axios.get(`${BASE_URL}${url}`)
+
+    const params = { slug }
+    axios.get(`${BASE_URL}/product`, {params})
     .then(res => {
+        console.log(res.data)
         dispatch({
             type: GET_PRODUCT,
             payload: res.data
@@ -18,12 +20,32 @@ export const getProduct = (url) => (dispatch, getState) => {
     .catch(err => console.log(err))
 }
 
-export const getProducts = (page) => (dispatch, getState) => {
+export const getFilteredProducts = () => (dispatch, getState) => {
     dispatch({
         type: LOADING,
         payload: true
     })
-    axios.get(`${BASE_URL}/latest-products/?page${page}&page_size=10`)
+
+    const { priceFrom,
+            priceTo,
+            sizeList,
+            sort,
+            category,
+            search} = getState().params
+
+    const params = {
+        sort
+    }
+
+    if (priceFrom !== null || priceFrom !== '' ) params.filterFromPrice = priceFrom
+    if (priceTo !== null || priceTo !== '') params.filterToPrice = priceTo
+    if (sizeList !== null) params.sizes = sizeList
+    if (category !== null) params.category = category
+    if (search !== null || search !== '' ) params.search = search
+
+    console.log(params)
+
+    axios.get(`${BASE_URL}/products/`, {params})
     .then(res => {
         dispatch({
             type: GET_PRODUCTS,
@@ -33,7 +55,7 @@ export const getProducts = (page) => (dispatch, getState) => {
     .catch(err => console.log(err))
 }
 
-export const getFilteredProducts = () => (dispatch, getState) => {
+export const getProducts = () => (dispatch, getState) => {
     dispatch({
         type: LOADING,
         payload: true
@@ -58,6 +80,7 @@ export const getFilteredProducts = () => (dispatch, getState) => {
     }
     axios.get(`${BASE_URL}/products?sizes=[${sizeList}]`, {params: params})
     .then(res => {
+        console.log(res.data)
         dispatch({
             type: GET_PRODUCTS,
             payload: res.data
@@ -84,6 +107,14 @@ export const getNewPage = (url) => (dispatch, getState) => {
 export const updateFilters = payload => {
     return {
         type: UPDATE_FILTERS,
+        payload
+    }
+}
+
+export const updateSearch = payload => {
+    console.log(payload)
+    return {
+        type: UPDATE_SEARCH,
         payload
     }
 }

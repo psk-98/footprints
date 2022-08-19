@@ -20,7 +20,7 @@ class Product extends Component {
 
     state = {
         statusP: false,
-        pageSize: this.props.products.pageSize
+        pageHeader: '',
     }
 
     handleAddCart = (product) => {
@@ -64,25 +64,31 @@ class Product extends Component {
         }
     }
 
-    handlePageChange = (url) => this.props.getNewPage(url)
-
-    componentDidMount() {
+    handleCategory = () => {
         const {getFilteredProducts} = this.props
 
         const {catSlug} = this.props.match.params
         switch (catSlug) {
             case 'women':
-                this.props.updateCategory('Women')
+                this.setState({pageHeader: "for her"})
+                this.props.updateCategory('women')
                 break;
             case 'men':
-                this.props.updateCategory('Men')
+                this.setState({pageHeader: "for him"})
+                this.props.updateCategory('men')
                 break;
             default:
-                console.log('said null')
+                this.setState({pageHeader: "collection"})
                 this.props.updateCategory(null)
                 break;
         }
         getFilteredProducts()
+    }
+
+    handlePageChange = (url) => this.props.getNewPage(url)
+
+    componentDidMount() {
+        this.handleCategory()
     }
 
     componentDidUpdate(prevProps) {
@@ -91,20 +97,7 @@ class Product extends Component {
 
         if (prevProps.match.params !== this.props.match.params) 
         {
-            const {catSlug} = this.props.match.params
-            switch (catSlug) {
-                case 'women':
-                    this.props.updateCategory('Women')
-                    break;
-                case 'men':
-                    this.props.updateCategory('Men')
-                    break;
-                default:
-                    console.log('said null')
-                    this.props.updateCategory(null)
-                    break;
-            }
-            this.props.getFilteredProducts()
+            this.handleCategory()
         }
     }
 
@@ -115,14 +108,16 @@ class Product extends Component {
 
         const nextDetails = this.handleNext() 
 
-        const productLists =  loading ? (<Loader/>)
+        const productList =  loading ? (<Loader/>)
         :(
             products.map(product => {
                 return (
-                    <div className='card-wrapper'>
-                        <Link to={`products${product.get_absolute_url}`}>
+                    <div className='card-wrapper' key={product.id}>
+                        <Link to={`${product.category}/${product.slug}`}>
                             <div className='card-img'>
-                                <img src={product.productImages[0].get_image}/>
+                                <img src={product.product_images[0].get_image}
+                                    alt={product.name}
+                                />
                             </div>
                             <div className='card-details'>
                                 <div className='card-product-name'>
@@ -139,12 +134,13 @@ class Product extends Component {
             })
         )
 
+        
         return (
             <>
                 <Filterbar/>
                 <div className='pv-heading-wrapper'>
                     <span className='productView-heading'>
-                        Collection
+                        {this.state.pageHeader}
                     </span>
                 </div>
                 <div className='settings-wrapper'>
@@ -156,7 +152,7 @@ class Product extends Component {
                             <circle cx="13" cy="24.5" r="2" fill="white" ></circle>
                             <circle cx="7" cy="17.5" r="2" fill="white" ></circle>
                         </svg>
-                        <span>Sort</span>
+                        <span>Filter & Sort</span>
                     </div>
                     <div className='num-show'>
                         <span>
@@ -165,7 +161,7 @@ class Product extends Component {
                     </div>
                 </div>
                 <div className='products-wrapper'>
-                    {productLists}
+                    {productList}
                 </div>
                 <div className='pagination-wrapper'>
                     <nav className='pagination-nav'>

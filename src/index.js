@@ -14,6 +14,9 @@ import Filterbar from './components/products/filterbar';
 import Product from './components/products/product';
 import Cart from './components/cart/cart';
 import Checkout from './components/checkout/checkout';
+import Login from './components/accounts/login';
+import Register from './components/accounts/register';
+import Ordersuccess from './components/common/orderSuccess'
 
 import './styles/global.css'
 import './styles/navbar.css'
@@ -24,8 +27,14 @@ import './styles/filterbar.css'
 import './styles/cart.css'
 import './styles/checkout.css'
 import './styles/alerts.css'
+import './styles/accounts.css'
+import './styles/payment.css'
 
 import Alerts from './components/common/alertsWrapper';
+
+import { loadUser } from './actions/accounts';
+
+//store.dispatch(loadUser())
 
 
 ReactDOM.render(
@@ -35,12 +44,15 @@ ReactDOM.render(
           <div className='container'>
             <Switch>
               <Route exact path='/' component={Home} />
-              <Route exact path='/products/:catSlug/:productSlug' component={Product} />
+              <Route exact path='/products/:catSlug/:productSlug/' component={Product} />
               <Route exact path='filter' component={Filterbar} />
               <Route exact path='/products' component={Products} />
               <Route exact path='/products/:catSlug' component={Products} />
               <Route exact path='/cart' component={Cart} />
-              <Route exact path='/checkout' component={Checkout} /> 
+              <Route exact path='/checkout' component={Checkout} />
+              <Route exact path='/login' component={Login} />
+              <Route exact path='/register' component={Register} />
+              <Route exact path='/ordersuccess' component={Ordersuccess} /> 
             </Switch>
           </div>
           <Alerts/>

@@ -95,15 +95,16 @@ class Product extends Component {
     }
 
     componentDidMount() {
-        const {getProduct, match} = this.props
-        getProduct(match.url)
+        const {productSlug} = this.props.match.params
+        const {getProduct} = this.props
+        getProduct(productSlug)
     }
 
     componentDidUpdate(prevProps) {
         const {product} = this.props
         if (prevProps.product !== product)
         {
-            let imgLength = product.productImages.length
+            let imgLength = product.product_images.length
             this.setState({
                 numImages: imgLength
             })
@@ -131,11 +132,11 @@ class Product extends Component {
     }
 
     handleSizeDisplay = () => {
-        const {productStock} = this.props.product
+        const {product_stock} = this.props.product
         let theReturn = ''
-        if (productStock.length !== 0)
+        if (product_stock.length !== 0)
         {
-           theReturn =  productStock.map(stock => {
+           theReturn =  product_stock.map(stock => {
                     
                     return (
                         <>
@@ -159,9 +160,9 @@ class Product extends Component {
     }
  
     handleImgs = () => {
-        const {productImages} = this.props.product
+        const {product_images} = this.props.product
         return (
-            productImages.map(image => {
+            product_images.map(image => {
                 return (
                     <>
                         <img src={image.get_image} />
@@ -180,7 +181,7 @@ class Product extends Component {
                 <div className='product-wrapper'>
                     <div className='product-img'>
                         <div className='product-img-sm'>
-                            <img src={product.productImages[imgIndex].get_image}/>
+                            <img src={product.product_images[imgIndex].get_image}/>
                             <div className='img-selectors'>
                                 <div onClick={()=> this.handleSlider('back')} >
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox='0 0 48 48'>

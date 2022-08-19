@@ -1,5 +1,8 @@
 .shipping-wrapper {
-    width: 100%;
+    width: 80%;
+    text-align: left;
+    margin: auto;
+    padding: 30px 0;
     text-transform: uppercase;
 }
 .shipping-heading {
@@ -8,26 +11,27 @@
     margin: 0 0 10px 0;
 }
 .shipping-form {
+    width: 100%;
 }
 .form-group {
     margin: 30px 0;
 }
-.form-group, .form-group input{
+.form-group, .form-group input ,.payment-wrapper input{
     width: 100%;
 }
-.form-group input::placeholder {
+.form-group input::placeholder,.payment-wrapper input::placeholder {
     text-transform: uppercase;
     color: #707070;
 }
-.form-group input:focus {
+.form-group input:focus, .payment-wrapper input:focus {
     outline: none;
 }
-.form-group input {
+.form-group input, .payment-wrapper input {
     border: none;
     border-bottom: .5px solid #707070;
     padding: 2px 0;
 }
-.form-group button{
+.form-group button, .payment-wrapper button{
     font-size: 14px;
     padding: 8px 30px;
     text-transform: uppercase;
@@ -36,4 +40,71 @@
     color: #f5f5f5;
     border: none;
 }
+
+.modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.9);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: all .3s ease-in;
+}
+.modal {
+    background-color: #f5f5f5;
+    padding: 40px;
+}
+.auth-btn, .guest-btn {
+    margin: 25px;
+    background: #000;
+    color: #f5f5f5;
+    padding: 25px;
+    text-align: center;
+    cursor: pointer;
+}
+.auth-btn:hover, .guest-btn:hover, .modal button:hover {
+    scale: 1.1;
+    transition: all .2s ease-in;
+}
+.auth-btn a {
+    color: #f5f5f5;
+    margin: 0 5px;
+}
+.modal button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.payment-wrapper {
+    display: flex;
+    height: 90vh;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.payment-wrapper form{
+    margin: 10px 0;
+    width: 290px;
+}
+.payment-wrapper button{
+    margin: 20px 0;
+}
+.checkout-loader {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media (min-width: 768px) {
+    .shipping-wrapper {
+        width: 50%;
+    }   
+}
+
 

@@ -4,7 +4,7 @@
     left: 0;
     max-width: 100%;
     width: 100%;
-    height: 10vh;
+    height: 8vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -26,6 +26,11 @@
 }
 .nav-item-top {
     margin: 0 5px;
+    cursor: pointer;
+    transition: .5s ease-in-out;
+}
+.nav-item-top:hover{
+    scale: 1.1;
 }
 .user-top {
     display: none;
@@ -81,6 +86,7 @@
 }
 .nav-list {
     text-align: left;
+    width: 90%;
 }
 .nav-item, .side-login-item {
     list-style: none;
@@ -131,9 +137,9 @@
 }
 .side-social-list {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     margin: 25px;
+    width: 80%;
 }
 .side-social-item svg{
     margin: 0 10px;
@@ -145,12 +151,51 @@
     transform: scale(1.5);
 }
 
+.search-form {
+    width: 100%;
+    height: 5vh;
+    display: flex;
+    align-items: center;
+}
+.search-form .search-bar::placeholder{
+    text-transform: uppercase;
+    font-weight: 400;
+}
+.search-form .search-bar:focus{
+    outline: none;
+}
+.search-form .search-bar{
+    width: 90%;
+    padding: 2px 7px;
+    height: 3vh;
+    font-weight: 500;
+    border-radius: 0;
+    border: solid 1px #000;
+    border-right: none;
+}
+.search-form div{
+    width: 10%;
+    border-radius: 0;
+    height: 3vh;
+    padding: 2px 0;
+    border: solid 1px #000;
+    border-left: none;
+    background: none;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    transition: all 0.5s ease-in;
+}
 
-@media (min-width: 744) {
-    li.user-top {
-        display: block !important; 
-    } 
+
+@media (min-width: 768px) { 
     .logo {
         font-size: 30px;
-    }  
+    }
+    .search-form .search-bar{
+        width: 95%;
+    }
+    .search-form div{
+        width: 5%;
+    }
 }

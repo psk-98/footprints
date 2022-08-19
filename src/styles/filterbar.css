@@ -5,7 +5,7 @@
     position: fixed;
     top: 0;
     right: -250px;
-    margin: 10vh 0 0 0; 
+    margin: 8vh 0 0 0; 
     transition: right .5 ease-in;
 }
 nav.panel-open {
@@ -18,8 +18,8 @@ nav.panel-open {
     color: #f5f5f5;
     text-decoration: none;
 }
-.size-filter {
-    display: none;
+.size-filter { 
+    transition: all 0.5s ease-in-out;
 }
 .size-filter-options ul{
     display: flex;
@@ -36,6 +36,7 @@ nav.panel-open {
 .price-filter {
     display: flex;
     flex-direction: column;
+    transition: all 0.5s ease-in-out;
 }
 .expand-control {
     display: flex;
@@ -51,6 +52,8 @@ nav.panel-open {
     display: flex;
     justify-content: space-between;
     padding:  0 5px;
+}
+.sort-options {
     transition: all 0.5s;
 }
 .sort-options li {
@@ -65,10 +68,17 @@ nav.panel-open {
     display: flex;
     opacity: 1;
 }
+.price-filter-options input::placeholder{
+    text-transform: uppercase;
+}
+.price-filter-options input:focus{
+    font-weight: 500;
+}
 .price-filter-options input{
     width: 100px;
     border: 1px solid #707070;
     padding: 5px 7px;
+    border-radius: 0;
 }
 .action-btns {
     display: flex;

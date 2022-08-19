@@ -1,9 +1,26 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import Loader from '../common/loader'
+import { Redirect } from 'react-router-dom'
+import { placeOrder } from '../../actions/checkout'
+import Payment from './payment'
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from "@stripe/stripe-js/pure";
+import "react-credit-cards/es/styles-compiled.css";
+
+
 
 class Checkout extends Component {
 
+    static propTypes = {
+        accounts: PropTypes.object.isRequired,
+        checkout: PropTypes.object.isRequired,
+        placeOrder: PropTypes.func.isRequired
+    }
+
     state = {
+        isCard: false,
         alertStatus: false,
         name: '',
         surname: '',
@@ -39,54 +56,68 @@ class Checkout extends Component {
         if(country === '' || country === null) this.setState({alertStatus: true})
         if(postal === '' || postal === null) this.setState({alertStatus: true})
 
-        const shipDetails = {
-            name,
-            surname,
-            cName,
-            email,
-            phone,
-            address,
-            city,
-            country,
-            postal
+        this.setState({isCard: true})
+    }
+
+    componentDidMount() {
+
+        console.log(this.props.checkout)
+        const {isAuthenticated, user} = this.props.accounts
+        if (isAuthenticated)
+        {
+            this.setState({
+                name: user.first_name,
+                surname: user.last_name,
+                email: user.email
+            })
         }
-
-        this.setState({
-            name: '',
-            surname: '',
-            cName: '',
-            email: '',
-            phone: '',
-            address: '',
-            city: '',
-            country: '',
-            postal: '',
-        })
-
     }
 
     render () {
-        console.log(this.state.name)
 
-        return (
-            <>
+        if(this.props.checkout.orderSuccess) {
+            return <Redirect to="/ordersuccess" />
+        }
+
+        const { name,
+                email,
+                address,
+                city,
+                country,
+                postal, 
+                isCard  } = this.state
+
+        const shipDetails = {
+            name,
+            email,
+            address,
+            city,
+            country,
+            postal,
+            default: true,
+            address_type: "S"
+        }
+
+        const stripePromise = loadStripe('pk_test_51LXAGyHLXSuXXRsqYZiKwRwPedjADd0meHrXwVRyJbiuAyvYl0BRwB9GTLLbRqD0Y2TulmIh4Yh1SvqodQWrbsLo00gNNrQjjM');
+
+        const checkoutComp = this.props.checkout.loading ? <div className='checkout-loader'><Loader/></div> :
+        (
+            isCard ? 
+                <div className='payment-wrapper'>
+                    <Elements stripe={stripePromise}>
+                        <Payment shipDetails={shipDetails} placeOrder={this.props.placeOrder}/>
+                    </Elements>
+                </div>
+                :
                 <div className='shipping-wrapper'>
                     <div className='shipping-heading'>
                         Shipping details
                     </div>
                     <div>
-                        <form className='shipping-form'>
+                        <form className='shipping-form' onSubmit={this.handleSubmit}>
                             <div className='form-group'>
                                 <input type='text' placeholder='Name' name='name' 
                                     value={this.state.name} onChange={this.handleChange} />
-                            </div>
-                            <div className='form-group'>
-                                <input type='text' placeholder='Surname' name='surname' 
-                                    value={this.state.surname} onChange={this.handleChange} />
-                            </div>
-                            <div className='form-group'>
-                                <input type='text' placeholder='Company name (optional)' name='cName' 
-                                    value={this.state.cName} onChange={this.handleChange}    />
                             </div>
                             <div className='form-group'>
                                 <input type='text' placeholder='Address' name='address' 
@@ -105,10 +136,6 @@ class Checkout extends Component {
                                     value={this.state.country} onChange={this.handleChange}    />
                             </div>
                             <div className='form-group'>
-                                <input type='tel' placeholder='phone number' name='phone' 
-                                    value={this.state.phone} onChange={this.handleChange}    />
-                            </div>
-                            <div className='form-group'>
                                 <input type='email' placeholder='Email' name='email' 
                                     value={this.state.email} onChange={this.handleChange}    />
                             </div>
@@ -118,12 +145,19 @@ class Checkout extends Component {
                         </form>
                     </div>
                 </div>
+        ) 
+
+        return (
+            <>
+              {checkoutComp}  
             </>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
+    accounts: state.accounts,
+    checkout: state.checkout
 })
 
-export default  connect(mapStateToProps, {}) (Checkout)
+export default  connect(mapStateToProps, {placeOrder}) (Checkout)
