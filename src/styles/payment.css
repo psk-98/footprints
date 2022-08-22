@@ -12,3 +12,9 @@
     width: 100%;
     z-index: 2;
 }
+.payment-desc {
+    margin: 25px;
+    display: flex;
+    justify-content: center;
+    color: red;
+}

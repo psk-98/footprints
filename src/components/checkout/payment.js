@@ -28,6 +28,9 @@ class Payment extends Component {
     render () {
         return (
             <>
+                <div className='payment-desc'>
+                    Use 4242 4242 4242 4242 for card number, any future date and any number for zipcode
+                </div>
                 <form onSubmit={this.handleSubmit} >
                     <div className='card'>
                         <div className='card-text'>
