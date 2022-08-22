@@ -100,7 +100,6 @@ class Filterbar extends Component {
             [name]: {isActive:!value, name: 3},
             sizeList: temp
         })
-        console.log(this.state.[name])
 
     }
 
