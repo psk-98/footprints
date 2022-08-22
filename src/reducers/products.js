@@ -22,7 +22,8 @@ export default function(state = initState, action) {
         case GET_PRODUCT:
             return {
                 ...state,
-                product: action.payload
+                product: action.payload,
+                loading: false
             }
         case GET_PRODUCTS:
             return {

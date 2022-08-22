@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import {getProduct} from '../../actions/products'
 import {addCart} from '../../actions/cart'
 import { returnErrors } from '../../actions/errors'
+import Loader from '../common/loader'
 
 
 class Product extends Component {
@@ -173,10 +174,10 @@ class Product extends Component {
     }
 
     render () {
-        const {product} = this.props
+        const {product, loading} = this.props
         const {imgIndex, numImages} = this.state
 
-        const productDetail = product ? (
+        const productDetail = loading ?(<div className='checkout-loader'><Loader/></div>) : product ? (
             <>
                 <div className='product-wrapper'>
                     <div className='product-img'>
