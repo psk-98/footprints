@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import {updateSearch, getFilteredProducts} from '../../actions/products'
 import { logout} from '../../actions/accounts'
 
@@ -70,6 +70,7 @@ class Navbar extends Component {
     }
 
     handleSearch = (e) => {
+        e.preventDefault()
         this.props.updateSearch(this.state.search)
         this.props.getFilteredProducts()
         this.setState({
@@ -81,14 +82,14 @@ class Navbar extends Component {
     handleSearchBar = () => {
         const theReturn = this.state.isOpen ? (
             <>
-                <div className='search-form' onSubmit={this.handleSearch}>
+                <form className='search-form' onSubmit={this.handleSearch}>
                     <input className='search-bar'
                         type='text' placeholder='search' 
                         name='search' value={this.state.search}
                         onChange={this.handleChange}
                     />
                     <div >
-                    {this.state.isEmpty ?   <svg xmlns="http://www.w3.org/2000/svg" height="21" viewBox='0 0 48 48' onClick={() => this.setState({isOpen:false})}>
+                        {this.state.isEmpty ?   <svg xmlns="http://www.w3.org/2000/svg" height="21" viewBox='0 0 48 48' onClick={() => this.setState({isOpen:false})}>
                                                 <path d="m12.45 37.65-2.1-2.1L21.9 24 10.35 12.45l2.1-2.1L24 21.9l11.55-11.55 2.1 2.1L26.1 24l11.55 11.55-2.1 2.1L24 26.1Z"/>
                                             </svg>: 
                                             <svg xmlns="http://www.w3.org/2000/svg" height="21" width="21" viewBox='0 0 48 48' onClick={() => this.handleSearch()}>
@@ -96,7 +97,7 @@ class Navbar extends Component {
                                             </svg>
                         }
                     </div>
-                </div>
+                </form>
             </>
         ):(
             <>
@@ -182,7 +183,49 @@ class Navbar extends Component {
                 <nav className={this.state.toggle? "navbar change" : "navbar"}>
                     <div className="navbar-top">
                         <div className='nav-top-wrapper'>
-                            {navTop}
+                            <div className='burger-wrapper'>
+                                <div className="burger" onClick={() => this.Toggle()}>
+                                    <div className="line line-1"></div>
+                                    <div className="line line-2"></div>
+                                    <div className="line line-3"></div>
+                                </div>
+                            </div>
+                            <div className='logo'>
+                                <Link to='/'>
+                                    FootPrints
+                                </Link>
+                            </div>
+                            <div className='nav-list-top'>
+                                <ul>
+                                    <li className="nav-item-top">
+                                        <Link to='/products/search' className='nav-link-top'>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="21" width="21" viewBox='0 0 48 48'>
+                                                <path d="m39.55 41.1-13-12.95q-1.5 1.3-3.475 2.025-1.975.725-4.125.725-5.1 0-8.625-3.525Q6.8 23.85 6.8 18.8q0-5 3.525-8.525Q13.85 6.75 18.9 6.75q5.05 0 8.575 3.525Q31 13.8 31 18.8q0 2.1-.725 4.1-.725 2-2.075 3.6l13 12.95Zm-20.6-12.45q4.05 0 6.9-2.875Q28.7 22.9 28.7 18.8t-2.85-6.95Q23 9 18.95 9q-4.15 0-7 2.85Q9.1 14.7 9.1 18.8t2.85 6.975q2.85 2.875 7 2.875Z"/>
+                                            </svg>
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item-top">
+                                        {this.props.accounts.isAuthenticated ? (
+                                            <Link to='/login' className='nav-link-top'>
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox='0 0 48 48' height="21">
+                                                    <path d="M24 23.95q-3.3 0-5.4-2.1-2.1-2.1-2.1-5.4 0-3.3 2.1-5.4 2.1-2.1 5.4-2.1 3.3 0 5.4 2.1 2.1 2.1 2.1 5.4 0 3.3-2.1 5.4-2.1 2.1-5.4 2.1ZM8 40v-4.7q0-1.9.95-3.25T11.4 30q3.35-1.5 6.425-2.25Q20.9 27 24 27q3.1 0 6.15.775 3.05.775 6.4 2.225 1.55.7 2.5 2.05.95 1.35.95 3.25V40Z"/>
+                                                </svg>
+                                            </Link>
+                                        ):(
+                                            <Link to='/login' className='nav-link-top'>
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="21" viewBox='0 0 48 48'>
+                                                    <path d="M24 23.35q-2.9 0-4.775-1.875Q17.35 19.6 17.35 16.7q0-2.9 1.875-4.75T24 10.1q2.9 0 4.775 1.85 1.875 1.85 1.875 4.75t-1.875 4.775Q26.9 23.35 24 23.35ZM9 38.6v-3.8q0-1.6.85-2.8.85-1.2 2.2-1.85 3.2-1.4 6.125-2.1 2.925-.7 5.825-.7 2.9 0 5.825.725Q32.75 28.8 35.9 30.2q1.4.65 2.25 1.825Q39 33.2 39 34.8v3.8Zm2.25-2.25h25.5V34.8q0-.75-.5-1.475-.5-.725-1.3-1.125-2.95-1.45-5.575-2.025T24 29.6q-2.75 0-5.425.575T13 32.2q-.75.4-1.25 1.125t-.5 1.475ZM24 21.1q1.85 0 3.1-1.25t1.25-3.15q0-1.85-1.25-3.1T24 12.35q-1.85 0-3.1 1.25t-1.25 3.1q0 1.9 1.25 3.15T24 21.1Zm0-4.4Zm0 19.65Z"/>
+                                                </svg>
+                                            </Link>
+                                        )}
+                                    </li>
+                                    <li className="nav-item-top">
+                                        <Link to='/cart' className='nav-link-top'>
+                                            {this.handleCartIcon()}
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <div className={this.state.toggle? "overlay changed" : "overlay"}></div>
