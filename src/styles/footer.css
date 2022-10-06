@@ -1,0 +1,42 @@
+.footer {
+    margin: 40px 25px 0 25px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.footer .header {
+    margin: 0;
+} 
+.sub-form {
+    margin: 30px 0 20px 0;
+    padding: 5px;
+    border-bottom: 1px solid #000;
+}
+.sub-form input, .sub-form button {
+    border: none;
+    background: none;
+}
+.sub-form input::placeholder {
+    color: #000;
+}
+.sub-form input:focus, .sub-form button:focus {
+    outline: none;
+}
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.footer-link {
+    margin: 5px 10px;
+    font-size: 10px;
+}
+.footer-bottom {
+    margin: 15px 0;
+}
+.footer-bottom, .footer-bottom a {
+    font-size: 8px;
+}
+.footer-bottom a {
+    margin: 0 0 0 3px;
+}
