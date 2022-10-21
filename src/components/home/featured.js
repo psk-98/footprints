@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getProducts } from "../../actions/products"
+import Loader from "../common/loader"
 
 const Featured = () => {
   const state = useSelector((state) => state)
@@ -11,14 +12,18 @@ const Featured = () => {
     dispatch(getProducts())
   }, [])
 
-  const { products } = state
+  const { products, loading, error } = state
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : error ? (
+    <div className="error-msg lighter">{error?.message}!</div>
+  ) : (
     <div className="featured-wrapper">
       <div className="featured">
         <div className="header">Featured products</div>
         <div className="cards-wrapper">
-          {products?.map((product) => {
+          {/*products?.map((product) => {
             return (
               <div className="featured-card">
                 <div className="img-wrapper">
@@ -31,7 +36,7 @@ const Featured = () => {
                 <div className="featured-price">R {product.price}</div>
               </div>
             )
-          })}
+          })*/}
         </div>
       </div>
     </div>

@@ -1,22 +1,72 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { getProducts } from "../actions/products"
+import { getNewPage, getProduct, getProducts } from "../actions/products"
 
 export const productsSlice = createSlice({
   name: "products",
   initialState: {
-    sort: "-date_added",
-    pageSize: 4,
+    panelStatus: false,
+    loading: true,
+    selectedDesc: "desc",
+    selectedSizes: [],
+  },
+  reducers: {
+    updateSizes: (state, action) => {
+      if (state.selectedSizes.includes(action?.payload)) {
+        //remove element if already in array
+        state.selectedSizes = state.selectedSizes.filter(
+          (element) => element !== action?.payload
+        )
+      } else state.selectedSizes.push(action?.payload)
+    },
+    updatePanel: (state) => {
+      state.panelStatus = !state.panelStatus
+    },
+    updateDesc: (state, action) => {
+      state.selectedDesc = action?.payload
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getProducts.pending, (state, action) => {
       state.loading = true
     })
     builder.addCase(getProducts.fulfilled, (state, action) => {
-      console.log(action.payload.res.data)
-      state.products = action?.payload.res.data.results
+      state.products = action.payload.res.data.results
+      state.numProducts = action.payload.res.data.count
+      state.prevPage = action.payload.res.data.previous
+      state.nextPage = action.payload.res.data.next
+      state.loading = false
     })
     builder.addCase(getProducts.rejected, (state, action) => {
       state.error = action.payload
+      state.loading = false
+    })
+    // new page
+    builder.addCase(getNewPage.pending, (state, action) => {
+      state.loading = true
+    })
+    builder.addCase(getNewPage.fulfilled, (state, action) => {
+      state.products = action.payload.res.data.results
+      state.numProducts = action.payload.res.data.count
+      state.prevPage = action.payload.res.data.previous
+      state.nextPage = action.payload.res.data.next
+      state.loading = false
+    })
+    builder.addCase(getNewPage.rejected, (state, action) => {
+      state.error = action.payload
+      state.loading = false
+    })
+    builder.addCase(getProduct.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(getProduct.fulfilled, (state, action) => {
+      state.product = action?.payload.res.data
+      state.loading = false
+    })
+    builder.addCase(getProduct.rejected, (state, action) => {
+      state.error = action.payload
+      state.loading = false
     })
   },
 })
+
+export const { updatePanel, updateDesc, updateSizes } = productsSlice.actions

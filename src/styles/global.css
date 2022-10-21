@@ -1,16 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&display=swap');
+
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     text-decoration: none;
     color: #000;
     font-size: 15px;
-    letter-spacing: 1px;
+    letter-spacing: .8px;
+    list-style: none;
     font-weight: 300;
 }
-.header {
-    font-weight: 400;
+.btn {
+    letter-spacing: 3px;
+}
+.nav-text {
+    font-size: 12px;
 }
 ::-webkit-scrollbar {
 width: 10px;
@@ -21,11 +26,25 @@ background: none;
 ::-webkit-scrollbar-thumb {
 background: #000
 }
+
 ::-webkit-scrollbar-thumb:hover {
 background: #555;
 }
 .container {
     max-width: 100%;
-    margin: 0 25px 0 25px;
-    min-height: 100vh;
+    height: 100%;
+    margin: 0 25px;
+    text-transform: uppercase;
+}
+.loader {
+    width: 10px;
+    height: 10px;
+    margin: 40px auto;
+    border-radius: 50%;
+    background: #000;
+}
+.header {
+    font-size: 20px;
+    letter-spacing: .6px;
+    font-weight: 400;
 }
