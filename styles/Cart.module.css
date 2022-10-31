@@ -1,0 +1,160 @@
+.cartWrapper {
+    margin: 0 0 10vh 0;
+}
+.cartTop {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin: 0 0 10px 0;
+}
+.cartHeading {
+    font-size: 16px;
+    font-weight: 500;
+}
+.cartDetails {
+    display: flex;
+    color: #707070;
+}
+.numItemsCart {
+    color: #707070;
+}
+.numItemsCart, .cartTotal {
+    margin: 0 5px;
+}
+.cartItemWrapper {
+    width: 100%;
+    max-width: 100%;
+    text-transform: uppercase;
+    display: flex;
+}
+.itemName {
+    font-weight: 500;
+    font-size: 12px;
+    margin: 0 0 3px 0;
+}
+.itemDetailsWrapper {
+    display: flex;
+}
+.itemImg {
+    width: 60%;
+    max-width: 60%;
+    display: flex;
+    align-items: flex-start;
+}
+.itemDetails{
+    width: 40%;
+    max-width: 40%;
+    margin: 0 0 0 10px;
+}
+.itemDetails div {
+    color: #707070;
+    fill: #707070;
+    font-size: 11px;
+}
+.itemQuantity {
+    display: flex;
+    margin: 20px 0;
+}
+.quantityChange svg {
+    height: 16px;
+    cursor: pointer;
+}
+.deleteItem {
+    cursor: pointer;
+}
+.numQuantity {
+    margin: 0 14px;
+}
+.priceDetails {
+    margin: 0 0 20px 0;
+}
+.priceDetails div {
+    margin: 2px 0;
+}
+.checkoutBtn {
+    width: auto;
+    height: 7vh;
+    background-color: #000;
+    color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-weight: 500;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.emptyMsg {
+    margin: 100px 0 0 0;
+    font-weight: 500;
+    text-align: center;
+    width: 100%;
+}
+
+.modalWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.9);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: all .3s ease-in;
+}
+.modal {
+    background-color: #f5f5f5;
+    padding: 40px;
+}
+.authBtn, .guestBtn {
+    margin: 25px;
+    background: #000;
+    color: #f5f5f5;
+    padding: 25px;
+    text-align: center;
+    cursor: pointer;
+}
+.auth-btn:hover, .guest-btn:hover, .modal button:hover {
+    scale: 1.1;
+    transition: all .2s ease-in;
+}
+.auth-btn a {
+    color: #f5f5f5;
+    margin: 0 5px;
+}
+.modal button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .cartItemsWrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+    .cartItemWrapper {
+        min-width: 48%;
+        width: 48%;
+        max-width: 48%;
+    }
+    .paginationItem svg {
+        height: 30px;
+    }
+
+}
+@media (min-width: 1024px) {
+    .cartItemWrapper {
+        min-width: 29%;
+        width: 29%;
+        max-width: 29%;
+    }
+}

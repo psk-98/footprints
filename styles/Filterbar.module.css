@@ -1,0 +1,49 @@
+.filterPanel {
+    width: 250px;
+    height: 100%;
+    background-color: #f5f5f5;
+    position: fixed;
+    top: 0;
+    right: -250px;
+    margin: 8vh 0 0 0; 
+    transition: right .5 ease-in;
+}
+.panelOpen {
+    right: 0;
+    padding: 0 20px;
+}
+.expandControl {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.priceFilterOptions {
+    display: flex;
+    justify-content: space-between;
+    padding:  0 5px;
+}
+.priceFilterOptions input{
+    width: 100px;
+    border: 1px solid #707070;
+    padding: 5px 7px;
+    border-radius: 0;
+}
+.priceFilterOptions input::placeholder{
+    text-transform: uppercase;
+}
+.priceFilterOptions input:focus{
+    font-weight: 500;
+}
+.sortOptions li {
+    margin: 4px 5px;
+    cursor: pointer;
+    border: 1px solid #000;
+    padding: 2px 12px;
+    text-align: center;
+}
+.filterPanel .active {
+    background-color: #000;
+    color: #f5f5f5;
+    text-decoration: none;
+    transition: all 0.5s ease-in-out;
+}

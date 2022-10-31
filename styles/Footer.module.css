@@ -1,0 +1,67 @@
+.footer {
+    margin: 40px 0 0 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.header {
+    margin: 40px 0 0 0;
+} 
+.subForm {
+    margin: 10px 0 30px 0;
+    padding: 5px;
+}
+.subForm input, .subForm button {
+    border: none;
+    background: none;
+}
+.subForm button, .footerLink {
+    cursor: pointer;
+}
+.subForm input:focus, .subForm button:focus {
+    outline: none;
+}
+.footerLinks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.footerLink {
+    margin: 5px 10px;
+    font-size: 10px;
+}
+.footerBottom {
+    margin: 40px 0;
+}
+.footerBottom, .footerBottom a {
+    font-size: 8px;
+}
+.footerBottom a {
+    margin: 0 0 0 3px;
+}
+
+@media (prefers-color-scheme: light), (prefers-color-scheme: dark) {
+    .footer {
+        background: #000;
+    }
+    .header, .subForm input, .subForm button, .footerLink, .footerBottom, .footerBottom a {
+        color: #f5f5f5;
+        stroke: #f5f5f5;
+    }
+    .subForm {
+        border-bottom: 1px solid #f5f5f5;
+    }
+    .subForm input::placeholder {
+        color: #a9a9a9;
+    }
+
+}
+
+@media (min-width: 768px) {
+    .footerLink {
+        font-size: 13px;
+    }
+    .footerBottom, .footerBottom a {
+        font-size: 10px;
+    }
+  }
