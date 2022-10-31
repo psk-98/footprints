@@ -55,7 +55,7 @@ const Login = () => {
         </button>
       </form>
       <div>
-        Don't have an account?
+        Dont have an account?
         <Link className={authStyles.formRedirect} href="/register">
           register
         </Link>
