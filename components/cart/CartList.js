@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { handlePriceDetails } from "./helpers"
 import cartStyles from "../../styles/Cart.module.css"
 import { decreaseQuantity, increaseQuantity } from "../../reducers/cart"
+import Image from "next/image"
 
 const CartList = () => {
   const state = useSelector((state) => state)
@@ -14,7 +15,15 @@ const CartList = () => {
         <div className={cartStyles.itemName}>{product.name}</div>
         <div className={cartStyles.itemDetailsWrapper}>
           <div className={cartStyles.itemImg}>
-            <img src={product.image} alt={product.name} />
+            <Image
+              width="800px"
+              height="800px"
+              layout="responsive"
+              placeholder="blur"
+              blurDataURL="Logo.png"
+              src={product.image}
+              alt={product.name}
+            />
           </div>
           <div className={cartStyles.itemDetails}>
             <div className="item-size">UK {product.size}</div>
