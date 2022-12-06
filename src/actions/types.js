@@ -35,5 +35,5 @@ export const USER_LOADING = "USER_LOADING"
 export const USER_LOADED = "USER_LOADED"
 export const ADDRESS_CREATED = "ADDRESS_CREATED"
 
-export const BASE_URL = 'https://footprintzz.herokuapp.com/api'
+export const BASE_URL = 'https://psk98.pythonanywhere.com/api'
 export const BASE_URLs = 'http://127.0.0.1:8000/api'
