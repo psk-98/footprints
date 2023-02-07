@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form"
 import { useDispatch } from "react-redux"
 import { updateAddress } from "../../reducers/checkout"
 import formStyles from "../../styles/Form.module.css"
-import { placeOrder } from "../../actions/checkout"
 
 //import checkStyles from "../../styles/Checkout.module.css"
 

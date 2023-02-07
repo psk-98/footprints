@@ -1,4 +1,4 @@
-import Shipping from "@/components/checkout/addressInfo"
+import Shipping from "@/components/checkout/AddressInfo"
 import Payment from "@/components/checkout/payment"
 import PageWrapper from "@/components/layout/PageWrapper"
 import { useState } from "react"
