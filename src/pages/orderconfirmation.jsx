@@ -4,7 +4,7 @@ import styles from "@/styles/Checkout.module.css"
 import { handleTotalPrice } from "@/components/cart/helpers"
 import Link from "next/link"
 
-export default function orderConfirmation() {
+export default function OrderConfirmation() {
   const state = useSelector((state) => state)
   const { cart } = state.cart
   const { deliveryA } = state.checkout
