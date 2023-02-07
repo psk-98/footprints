@@ -10,7 +10,7 @@ import { getProducts } from "@/actions/products"
 import { updateSlug } from "@/reducers/params"
 import { clearSProducts } from "@/reducers/products"
 import { sortFilter } from "public/svgs"
-import Loader from "@/components/layout/Loader"
+import Loader from "@/components/layout/loader"
 import { containerVariants } from "@/animations/routes"
 import { motion } from "framer-motion"
 

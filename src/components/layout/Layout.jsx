@@ -1,6 +1,6 @@
 import Footer from "./Footer"
 import { Montserrat } from "@next/font/google"
-import Nav from "../nav/nav"
+import Nav from "../nav/Nav"
 
 const montserrat = Montserrat({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],

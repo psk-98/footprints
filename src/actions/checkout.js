@@ -9,8 +9,6 @@ export const placeOrder = createAsyncThunk(
     { getState, dispatch, rejectWithValue },
   ) => {
     try {
-      console.log(charge_id)
-
       const { cart } = getState().cart
       const { deliveryA, billingA } = getState().checkout
       const params = {
@@ -24,12 +22,9 @@ export const placeOrder = createAsyncThunk(
         params.billing_address = billingA
         params.sameAs = deliveryA.sameAs
       }
-      console.log(params)
-
       const res = await axios.post(`${BASE_URL}/orders/`, { params: params })
       return { res }
     } catch (err) {
-      console.log(err)
       return rejectWithValue(err)
     }
   },
@@ -40,8 +35,6 @@ export const getOrderDetails = createAsyncThunk(
   async (order_ref, { getState, rejectWithValue }) => {
     try {
       let params = { order_ref }
-      console.log(params)
-
       const res = await axios.get(`${BASE_URL}/orders/`, { params })
       return { res }
     } catch (err) {

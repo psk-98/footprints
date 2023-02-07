@@ -43,10 +43,10 @@ export const productsSlice = createSlice({
       state.loading = true
     })
     builder.addCase(getProducts.fulfilled, (state, action) => {
-      state.products = action.payload.res.data.results
-      state.numProducts = action.payload.res.data.count
-      state.prevPage = action.payload.res.data.previous
-      state.nextPage = action.payload.res.data.next
+      state.products = action.payload.results
+      state.numProducts = action.payload.count
+      state.prevPage = action.payload.previous
+      state.nextPage = action.payload.next
       state.loading = false
     })
     builder.addCase(getProducts.rejected, (state, action) => {

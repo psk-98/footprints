@@ -17,13 +17,11 @@ export const getProducts = createAsyncThunk(
 
       if (priceFrom) params.filterFromPrice = priceFrom
       if (priceTo) params.filterToPrice = priceTo
-      console.log(params)
       const res = await axios.get(`${BASE_URL}/products/`, {
         params: params,
       })
-      return { res }
+      return res.data
     } catch (err) {
-      console.log(err)
       return rejectWithValue(err)
     }
   },
@@ -53,7 +51,6 @@ export const getNewPage = createAsyncThunk(
       const res = await axios.get(url)
       return { res }
     } catch (err) {
-      console.log(err)
       return rejectWithValue(err?.res)
     }
   },
@@ -67,7 +64,6 @@ export const getProduct = createAsyncThunk(
       const res = await axios.get(`${BASE_URL}/product`, { params })
       return { res }
     } catch (err) {
-      console.log(err)
       return rejectWithValue(err?.res)
     }
   },
