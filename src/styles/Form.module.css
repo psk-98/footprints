@@ -1,0 +1,63 @@
+.formHeader {
+  text-align: center;
+  margin: 4rem 0 6rem 0;
+}
+.formWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.inputGroup {
+  margin: 2rem 0;
+  width: 100%;
+}
+.inputGroup:last-child {
+  display: flex;
+  align-items: center;
+}
+.inputGroup input,
+.inputGroup select {
+  background: none;
+  padding: 0 0 1rem 1rem;
+  border: none;
+  width: 100%;
+  text-transform: none;
+  border-bottom: 1px solid #050505;
+}
+.inputGroup select {
+  padding: 1rem;
+  cursor: pointer;
+}
+.inputGroup input:focus,
+.inputGroup select:focus {
+  border-bottom: 2px solid #000;
+  outline: none;
+}
+.inputGroup label {
+  margin: 0 0 0 1rem;
+}
+.inputGroup input[type="checkbox"] {
+  margin: 0;
+  padding: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid #050505;
+}
+.inputGroup input:checked {
+  background: #050505 !important;
+}
+.inputGroup p {
+  color: #ff0000;
+  margin: 0.5rem 0 0 0;
+}
+.btnGroup input {
+  margin: 4rem 0 0 0;
+  border: none;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
+  color: #eee;
+  width: 100%;
+}

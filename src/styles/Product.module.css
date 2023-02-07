@@ -1,0 +1,135 @@
+.productCard {
+  margin: 3rem 0 0 0;
+}
+.selectorWrapperLg {
+  display: none;
+}
+.selectorWrapperSm {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0 4rem 0;
+}
+.selectorWrapperSm .imgSelector {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid #050505;
+  margin: 0 4rem;
+}
+.details {
+  text-align: center;
+}
+.category {
+  margin: 1rem 0;
+}
+.productSizes {
+  margin: 2rem 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.sizeOption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  margin: 0.5rem;
+  width: 9rem;
+  height: 3.5rem;
+  border: 1px solid #050505;
+  font-size: 2rem;
+}
+.addCart {
+  border: 1px solid #050505;
+  margin: 1rem 0;
+}
+.buyNow {
+  background: #050505;
+  color: #eee;
+}
+.addCart,
+.buyNow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 5rem;
+}
+.productDesc {
+  margin: 4rem 0;
+  line-height: 3rem;
+}
+.extraDetails {
+  margin: 0 0 4rem 0;
+}
+.extraDetailsControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.extraDetailsControls svg {
+  height: 1rem;
+}
+.extraDetailsText {
+  margin: 2rem 0 0 0;
+  line-height: 3rem;
+}
+
+@media (min-width: 768px) {
+  .productCard {
+    display: flex;
+    justify-content: space-between;
+  }
+  .imgsWrapper {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 49%;
+  }
+  .imgWrapper {
+    width: 83%;
+    margin: 0 0 0 1rem;
+  }
+  .selectorWrapperLg {
+    display: flex;
+    flex-direction: column;
+    width: 16.67%;
+  }
+  .selectorWrapperSm {
+    display: none;
+  }
+  .selectorWrapperLg .imgSelector {
+    width: 100%;
+    margin: 0 0 1rem 0;
+  }
+  .details {
+    width: 49%;
+    text-align: left;
+  }
+  .name,
+  .category,
+  .currency,
+  .price,
+  .addCart,
+  .buyNow {
+    font-size: 2rem;
+  }
+  .productDesc,
+  .extraDetailsText {
+    font-size: 2.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .name,
+  .category,
+  .currency,
+  .price,
+  .addCart,
+  .buyNow {
+    font-size: 3rem;
+  }
+  .addCart,
+  .buyNow {
+    font-weight: 400;
+  }
+}
