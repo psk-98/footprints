@@ -15,7 +15,7 @@ export default function ProductCards() {
           return (
             <motion.div
               className={styles.productCard}
-              key={product.id}
+              key={i}
               initial={{ opacity: 0, y: -10 }}
               animate={{
                 opacity: 1,

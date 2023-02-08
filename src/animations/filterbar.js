@@ -75,3 +75,20 @@ export const activeVariants = {
     },
   },
 }
+
+export const filterOptionVariants = {
+  open: {
+    opacity: 1,
+    //x: 0,
+    transition: {
+      type: "spring",
+    },
+  },
+  closed: {
+    opacity: 0,
+    //x: -30,
+    transition: {
+      type: "spring",
+    },
+  },
+}

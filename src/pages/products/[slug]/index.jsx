@@ -21,16 +21,8 @@ export default function Products() {
   const state = useSelector((state) => state)
   const dispatch = useDispatch()
   const [panelStatus, setPanel] = useState(false)
-  const {
-    loading,
-    error,
-    products,
-    numProducts,
-    search,
-    sProducts,
-    sNumProducts,
-    newSearch,
-  } = state.products
+  const { loading, error, products, numProducts, search, newSearch } =
+    state.products
   const { sort } = state.params
 
   useEffect(() => {
@@ -61,7 +53,6 @@ export default function Products() {
         initial="hidden"
         animate="visible"
       >
-        {console.log(router)}
         <motion.div
           className={`${styles.header} header`}
           variants={containerVariants}

@@ -1,9 +1,11 @@
 import PageWrapper from "@/components/layout/PageWrapper"
 import CartList from "@/components/cart/CartList"
 import { useState } from "react"
+import { useRouter } from "next/router"
 
 export default function Cart() {
   const [showModal, setShowModal] = useState(false)
+  const router = useRouter()
 
   return (
     <PageWrapper
