@@ -8,7 +8,7 @@ import {
 } from "../../animations/nav"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import Search from "./search"
+import Search from "./Search"
 import { useSelector } from "react-redux"
 import {
   searchIcon,

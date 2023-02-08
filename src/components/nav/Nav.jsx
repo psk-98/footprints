@@ -1,4 +1,4 @@
-import { motion, useAnimation, useScroll } from "framer-motion"
+import { useAnimation, useScroll } from "framer-motion"
 import {
   line1Variants,
   line2Variants,
@@ -6,9 +6,9 @@ import {
   navVariants,
 } from "../../animations/nav"
 import { useEffect, useState } from "react"
-import Sidebar from "./sidebar"
+import Sidebar from "./Sidebar"
 import { useRouter } from "next/router"
-import NavTop from "./top"
+import NavTop from "./Top"
 
 export default function Nav() {
   const [toggle, setToggle] = useState(false)
