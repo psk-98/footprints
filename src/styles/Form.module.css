@@ -22,6 +22,7 @@
   border: none;
   width: 100%;
   text-transform: none;
+  border-radius: 0;
   border-bottom: 1px solid #050505;
 }
 .inputGroup select {
@@ -31,6 +32,7 @@
 .inputGroup input:focus,
 .inputGroup select:focus {
   border-bottom: 2px solid #000;
+  border-radius: 0;
   outline: none;
 }
 .inputGroup label {
@@ -42,6 +44,7 @@
   width: 1.5rem;
   height: 1.5rem;
   border: 1px solid #050505;
+  border-radius: 0;
 }
 .inputGroup input:checked {
   background: #050505 !important;

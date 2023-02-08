@@ -7,6 +7,8 @@ import { getProducts } from "@/actions/products"
 import Hero from "@/components/home/Hero"
 import Slider from "@/components/common/productSlider"
 import Loader from "@/components/layout/loader"
+import { NextSeo } from "next-seo"
+import { useRouter } from "next/router"
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -14,6 +16,7 @@ export default function Home() {
 
   const state = useSelector((state) => state)
   const { products, loading } = state.products
+  const router = useRouter()
 
   useEffect(() => {
     dispatch(getProducts("home"))
@@ -35,7 +38,12 @@ export default function Home() {
   return loading ? (
     <Loader loading={loading} />
   ) : (
-    <PageWrapper key={loading}>
+    <PageWrapper
+      key={loading}
+      title="Home"
+      path={router.asPath}
+      desc="This is the home page of FootPrints a mock online store"
+    >
       <Hero />
       <Slider
         header="Shop for her"

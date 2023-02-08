@@ -6,9 +6,9 @@ import {
   navVariants,
 } from "../../animations/nav"
 import { useEffect, useState } from "react"
-import Sidebar from "./Sidebar"
+import Sidebar from "./sidebar"
 import { useRouter } from "next/router"
-import NavTop from "./Top"
+import NavTop from "./top"
 
 export default function Nav() {
   const [toggle, setToggle] = useState(false)

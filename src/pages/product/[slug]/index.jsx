@@ -30,7 +30,12 @@ export default function Product() {
   ) : error ? (
     <div className="error-msg">{error?.message}!</div>
   ) : (
-    <PageWrapper key={loading}>
+    <PageWrapper
+      key={loading}
+      title={product?.name}
+      path={router.asPath}
+      desc="This is the product view of FootPrints a mock online store"
+    >
       <div className="contained">
         <div className={styles.productCard}>
           <Images product={product} />

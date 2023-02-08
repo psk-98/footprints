@@ -3,11 +3,13 @@ import { useSelector } from "react-redux"
 import styles from "@/styles/Checkout.module.css"
 import { handleTotalPrice } from "@/components/cart/helpers"
 import Link from "next/link"
+import { useRouter } from "next/router"
 
 export default function OrderConfirmation() {
   const state = useSelector((state) => state)
   const { cart } = state.cart
   const { deliveryA } = state.checkout
+  const router = useRouter()
 
   const handlePriceDetails = (product) => {
     if (product.quantity > 1) {
@@ -30,7 +32,12 @@ export default function OrderConfirmation() {
   }
 
   return (
-    <PageWrapper>
+    <PageWrapper
+      key={router.route}
+      title="Order Confirmation"
+      path={router.asPath}
+      desc="This the order confirmation"
+    >
       <div className="contained">
         <div className={styles.checkoutProcess}>
           <div className="header">Thank you for your order</div>

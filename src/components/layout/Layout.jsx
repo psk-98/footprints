@@ -1,6 +1,8 @@
 import Footer from "./Footer"
 import { Montserrat } from "@next/font/google"
-import Nav from "../nav/Nav"
+import Nav from "../nav/nav"
+import Meta from "./Meta"
+import { NextSeo } from "next-seo"
 
 const montserrat = Montserrat({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -9,13 +11,19 @@ const montserrat = Montserrat({
 
 const Layout = ({ children }) => {
   return (
-    // <div className={montserrat.className} >
-    <>
+    <div className={montserrat.className}>
+      <Meta />
+      <NextSeo
+        twitter={{
+          handle: "@paul_sinci",
+          site: "@paul_sinci",
+          cardType: "summary_large_image",
+        }}
+      />
       <Nav />
       {children}
       <Footer />
-    </>
-    // </div>
+    </div>
   )
 }
 export default Layout

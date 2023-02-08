@@ -34,7 +34,7 @@ export default function ProductCards() {
                     src={product.product_images[0].get_image.replace(/\s+/, "")}
                     alt={product.name}
                     placeholder="blur"
-                    blurDataURL="/yoco.webp"
+                    blurDataURL="/Logo.png"
                   />
                 </div>
                 <div className={styles.name}>{product.name}</div>

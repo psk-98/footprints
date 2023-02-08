@@ -12,6 +12,7 @@ export const productsSlice = createSlice({
     panelStatus: false,
     loading: true,
     selectedDesc: "desc",
+    newSearch: false,
     //selectedSize: null,
   },
   reducers: {
@@ -36,6 +37,11 @@ export const productsSlice = createSlice({
     },
     clearSProducts: (state) => {
       state.sProducts = []
+      state.sNumProducts = 0
+      state.sLoading = false
+    },
+    updateNewSearch: (state, action) => {
+      state.newSearch = action.payload
     },
   },
   extraReducers: (builder) => {
@@ -59,10 +65,10 @@ export const productsSlice = createSlice({
       state.loading = true
     })
     builder.addCase(getNewPage.fulfilled, (state, action) => {
-      state.products = action.payload.res.data.results
-      state.numProducts = action.payload.res.data.count
-      state.prevPage = action.payload.res.data.previous
-      state.nextPage = action.payload.res.data.next
+      state.products = action.payload.results
+      state.numProducts = action.payload.count
+      state.prevPage = action.payload.previous
+      state.nextPage = action.payload.next
       state.loading = false
     })
     builder.addCase(getNewPage.rejected, (state, action) => {
@@ -74,10 +80,10 @@ export const productsSlice = createSlice({
       state.sLoading = true
     })
     builder.addCase(getSearchedProducts.fulfilled, (state, action) => {
-      state.sProducts = action.payload.res.data.results
-      state.sNumProducts = action.payload.res.data.count
-      state.sPrevPage = action.payload.res.data.previous
-      state.sNextPage = action.payload.res.data.next
+      state.sProducts = action.payload.results
+      state.sNumProducts = action.payload.count
+      state.sPrevPage = action.payload.previous
+      state.sNextPage = action.payload.next
       state.sLoading = false
     })
     builder.addCase(getSearchedProducts.rejected, (state, action) => {
@@ -106,4 +112,5 @@ export const {
   setProduct,
   updateSearch,
   clearSProducts,
+  updateNewSearch,
 } = productsSlice.actions

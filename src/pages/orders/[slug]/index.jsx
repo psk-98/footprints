@@ -16,7 +16,11 @@ export default function Orders() {
     if (slug) dispatch(getOrderDetails(slug))
   }, [slug])
   return (
-    <PageWrapper>
+    <PageWrapper
+      title="Orders"
+      path={router.asPath}
+      desc="This is the orders page of FootPrints a mock online store"
+    >
       {console.log(router.query)}
 
       <div className="contained">

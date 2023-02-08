@@ -10,9 +10,7 @@ export const getProducts = createAsyncThunk(
       const { pageSize, sort, priceFrom, priceTo, slug } = getState().params
       let params = { page_size: pageSize, sort: sort }
       if (something === true) params.search = getState().products?.search
-      else if (slug === "men" || slug === "women" || slug === "kids")
-        params.category = slug
-      if (something === "like") params.slug = slug
+      else if (slug === "men" || slug === "women") params.category = slug
       if (something === "home") params.page_size = 24
 
       if (priceFrom) params.filterFromPrice = priceFrom
@@ -37,7 +35,7 @@ export const getSearchedProducts = createAsyncThunk(
       const res = await axios.get(`${BASE_URL}/products/`, {
         params: params,
       })
-      return { res }
+      return res.data
     } catch (err) {
       return rejectWithValue(err)
     }
@@ -49,7 +47,7 @@ export const getNewPage = createAsyncThunk(
   async (url, { getState, dispatch, rejectWithValue }) => {
     try {
       const res = await axios.get(url)
-      return { res }
+      return res.data
     } catch (err) {
       return rejectWithValue(err?.res)
     }
