@@ -35,6 +35,9 @@ export default function Slider({ header, products, link }) {
                     src={product.product_images[0].get_image.replace(/\s+/, "")}
                     width="800"
                     height="800"
+                    priority
+                    placeholder="blur"
+                    blurDataURL="/Logo.png"
                     alt={product.name}
                   />
                 </div>

@@ -33,6 +33,7 @@ export default function ProductCards() {
                     height={800}
                     src={product.product_images[0].get_image.replace(/\s+/, "")}
                     alt={product.name}
+                    priority
                     placeholder="blur"
                     blurDataURL="/Logo.png"
                   />
