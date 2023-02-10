@@ -1,4 +1,4 @@
-import styles from "../../../styles/Products.module.css"
+import styles from "@/styles/Products.module.css"
 import PageWrapper from "@/components/layout/PageWrapper"
 import { useRouter } from "next/router"
 import { useDispatch, useSelector } from "react-redux"

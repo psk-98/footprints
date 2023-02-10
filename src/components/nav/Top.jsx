@@ -17,24 +17,46 @@ import {
   footprintsLogo,
 } from "public/svgs"
 import { containerVariants } from "@/animations/routes"
+import { useEffect, useState } from "react"
 
-export default function NavTop({
-  show,
-  toggle,
-  setToggle,
-  isSearch,
-  setIsSearch,
-}) {
+export default function NavTop({ toggle, setToggle, isSearch, setIsSearch }) {
   // const [isSearch, setIsSearch] = useState(false)
-  const router = useRouter()
   const state = useSelector((state) => state)
+
+  const [show, setShow] = useState(false)
+  const [lastScrollY, setLastScrollY] = useState(0)
+
+  const controlNavbar = () => {
+    if (typeof window !== "undefined") {
+      if (window.scrollY > lastScrollY) {
+        // if scroll down hide the navbar
+        setShow(false)
+      } else {
+        // if scroll up show the navbar
+        setShow(true)
+      }
+
+      // remember current page location to use in the next move
+      setLastScrollY(window.scrollY)
+    }
+  }
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", controlNavbar)
+
+      // cleanup function
+      return () => {
+        window.removeEventListener("scroll", controlNavbar)
+      }
+    }
+  }, [lastScrollY])
 
   return (
     <motion.div
       className={styles.navTop}
-      //style={{ display: router.route === "/checkout" ? "none" : "flex" }}
       variants={navVariants}
-      animate={show ? "none" : "transparent"}
+      animate={show || toggle || isSearch ? "none" : "transparent"}
     >
       {isSearch ? (
         <Search setIsSearch={setIsSearch} />
@@ -73,7 +95,10 @@ export default function NavTop({
           <div className={styles.topNavList}>
             <div
               className={styles.navItem}
-              onClick={() => setIsSearch(!isSearch)}
+              onClick={() => {
+                setIsSearch(!isSearch)
+                setToggle(false)
+              }}
             >
               {searchIcon}
             </div>

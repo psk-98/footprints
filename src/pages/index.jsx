@@ -1,18 +1,14 @@
-import Head from "next/head"
-
 import { useDispatch, useSelector } from "react-redux"
 import PageWrapper from "@/components/layout/PageWrapper"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { getProducts } from "@/actions/products"
 import Hero from "@/components/home/Hero"
 import Slider from "@/components/common/productSlider"
 import Loader from "@/components/layout/loader"
-import { NextSeo } from "next-seo"
 import { useRouter } from "next/router"
 
 export default function Home() {
   const dispatch = useDispatch()
-  const [loader, setLoader] = useState(true)
 
   const state = useSelector((state) => state)
   const { products, loading } = state.products
@@ -46,12 +42,12 @@ export default function Home() {
     >
       <Hero />
       <Slider
-        header="Shop for her"
+        header="Shop for women"
         products={filterWomen()}
         link={"/products/women"}
       />
       <Slider
-        header="Shop for him"
+        header="Shop for men"
         products={filterMen()}
         link={"/products/men"}
       />

@@ -1,10 +1,8 @@
 import { useRouter } from "next/router"
 import { useForm } from "react-hook-form"
 import { useDispatch } from "react-redux"
-import { updateAddress } from "../../reducers/checkout"
-import formStyles from "../../styles/Form.module.css"
-
-//import checkStyles from "../../styles/Checkout.module.css"
+import { updateAddress } from "@/reducers/checkout"
+import formStyles from "@/styles/Form.module.css"
 
 export default function Shipping({
   setShip,
@@ -37,20 +35,6 @@ export default function Shipping({
       country,
       sameAs,
     } = data
-    // dispatch(
-    //   updateAddress({
-    //     email,
-    //     number,
-    //     name,
-    //     address,
-    //     surname,
-    //     postal,
-    //     city,
-    //     province,
-    //     country,
-    //sameAs
-    //   }),
-    // )
     if (sameAs) {
       dispatch(
         updateAddress({
@@ -85,8 +69,6 @@ export default function Shipping({
       setPay(false)
       setBilling(true)
     }
-    //setIsShip(false)
-    //setIsPay(true)
   }
 
   return (

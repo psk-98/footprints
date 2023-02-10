@@ -1,14 +1,12 @@
 import Image from "next/image"
 import { useDispatch, useSelector } from "react-redux"
-import styles from "../../styles/Cart.module.css"
+import styles from "@/styles/Cart.module.css"
 import { handleTotalPrice, isEmpty } from "./helpers"
 import {
   decreaseQuantity,
   deleteCartItem,
   increaseQuantity,
 } from "../../reducers/cart"
-//import { motion } from "framer-motion"
-//import { btnVariants } from "../../animations/home"
 import { useRouter } from "next/router"
 import Link from "next/link"
 

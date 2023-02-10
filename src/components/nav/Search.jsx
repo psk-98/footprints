@@ -67,28 +67,19 @@ export default function Search({ setIsSearch }) {
       >
         {sLoading ? (
           <motion.div
-            className={loaderStyles.loaderWrapper}
+            className={styles.loaderWrapper}
             variants={wrapperVariants}
             animate="loading"
           >
             <motion.div
               key={1}
-              className={loaderStyles.loader}
+              className={styles.loader}
               variants={loaderVariants}
             ></motion.div>
+
             <motion.div
               key={2}
-              className={loaderStyles.loader}
-              variants={loaderVariants}
-            ></motion.div>
-            <motion.div
-              key={3}
-              className={loaderStyles.loader}
-              variants={loaderVariants}
-            ></motion.div>
-            <motion.div
-              key={4}
-              className={loaderStyles.loader}
+              className={styles.loader}
               variants={loaderVariants}
             ></motion.div>
           </motion.div>
@@ -119,7 +110,7 @@ export default function Search({ setIsSearch }) {
                           width="800"
                           height="800"
                           placeholder="blur"
-                          blurDataURL="/Logo.png"
+                          blurDataURL="/shoe.png"
                           src={product.product_images[0].get_image.replace(
                             /\s+/,
                             "",

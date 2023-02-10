@@ -1,10 +1,10 @@
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { placeOrder } from "../../actions/checkout"
-import styles from "../../styles/Checkout.module.css"
-import { handleTotalPrice } from "../cart/helpers"
+import { placeOrder } from "@/actions/checkout"
+import styles from "@/styles/Checkout.module.css"
 import YocoPayment from "./yocoCheckout"
+import { handleTotalPrice } from "../cart/helpers"
 
 export default function Payment() {
   const [isSuccess, setSuccess] = useState(false)

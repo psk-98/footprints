@@ -1,7 +1,8 @@
-import styles from "../../styles/Home.module.css"
+import styles from "@/styles/Home.module.css"
 import { useRouter } from "next/router"
 import Image from "next/image"
 import { forwardArrow } from "public/svgs"
+import { motion } from "framer-motion"
 
 export default function Slider({ header, products, link }) {
   const router = useRouter()
@@ -23,12 +24,13 @@ export default function Slider({ header, products, link }) {
         <div className={styles.slider}>
           {products?.map((product, i) => {
             return (
-              <div
+              <motion.div
                 className={styles.sliderCard}
                 key={product.id}
                 onClick={() => {
                   router.push(`/product/${product.slug}`)
                 }}
+                whileHover={{ scale: 1.05, opacity: 0.9 }}
               >
                 <div className={styles.sliderImg}>
                   <Image
@@ -51,7 +53,7 @@ export default function Slider({ header, products, link }) {
                 <div className={styles.productPrice}>
                   R{product.price.toFixed(2)}
                 </div>
-              </div>
+              </motion.div>
             )
           })}
         </div>

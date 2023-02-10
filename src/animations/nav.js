@@ -2,8 +2,8 @@
 export const line1Variants = {
   open: {
     rotateZ: -405,
-    translateX: -8,
-    translateY: 6,
+    translateX: -9,
+    translateY: 7,
     transition: {
       type: "spring",
       stiffness: 50,
@@ -36,8 +36,8 @@ export const line2Variants = {
 export const line3Variants = {
   open: {
     rotateZ: 405,
-    translateX: -8,
-    translateY: -6,
+    translateX: -9,
+    translateY: -7,
     width: "100%",
     transition: {
       type: "spring",
