@@ -4,7 +4,7 @@ const nextConfig = {
   //trailingSlash: true,
   images: {
     domains: ["127.0.0.1", "res.cloudinary.com"],
-    unoptimized: false,
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
