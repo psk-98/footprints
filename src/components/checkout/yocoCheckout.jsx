@@ -8,6 +8,8 @@ import { placeOrder } from "@/actions/checkout"
 export default function YocoPayment({ cart, setSuccess, setToken }) {
   const dispatch = useDispatch()
 
+  const totalPrice = handleTotalPrice(cart)
+
   useEffect(() => {
     const script = document.createElement("script")
     script.src = "https://js.yoco.com/sdk/v1/yoco-sdk-web.js"
@@ -19,18 +21,17 @@ export default function YocoPayment({ cart, setSuccess, setToken }) {
         publicKey: "pk_test_ed3c54a6gOol69qa7f45",
       })
       const checkoutButton = document.querySelector("#checkout-button")
-
       checkoutButton.addEventListener("click", () => {
         yoco.showPopup({
-          amountInCents: (parseFloat(handleTotalPrice(cart)) * 100).toString(),
+          amountInCents: String(handleTotalPrice(cart)).replace(".", ""),
           currency: "ZAR",
           callback: (result) => {
             if (result.error) {
               const errorMessage = result.error.message
               alert(`error occured: ${errorMessage}`)
             } else {
-              console.log("callback")
-              dispatch(placeOrder(result.id, 1))
+              console.log(result)
+              //dispatch(placeOrder(result.id, 1))
               setSuccess(true)
               setToken(result.id)
 
@@ -46,6 +47,7 @@ export default function YocoPayment({ cart, setSuccess, setToken }) {
     <>
       <div className={`${styles.payBtn} btn light`} id="checkout-button">
         Payment with Yoco
+        {console.log(String(handleTotalPrice(cart)).replace(".", ""))}
       </div>
       <div className={`${styles.secure} lighter`}>secured by {yocoLogo}</div>
     </>
