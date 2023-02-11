@@ -10,8 +10,8 @@ import Sizes from "../../../components/product/productSizes"
 import styles from "../../../styles/Product.module.css"
 import { updateSlug } from "../../../reducers/params"
 import { addToCart, clearCart } from "../../../reducers/cart"
-//import { motion } from "framer-motion"
 import PageWrapper from "../../../components/layout/PageWrapper"
+
 export default function Product() {
   const state = useSelector((state) => state)
   const dispatch = useDispatch()

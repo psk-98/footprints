@@ -6,10 +6,6 @@ import { handleTotalPrice } from "../cart/helpers"
 import { placeOrder } from "@/actions/checkout"
 
 export default function YocoPayment({ cart, setSuccess, setToken }) {
-  const dispatch = useDispatch()
-
-  const totalPrice = handleTotalPrice(cart)
-
   useEffect(() => {
     const script = document.createElement("script")
     script.src = "https://js.yoco.com/sdk/v1/yoco-sdk-web.js"
@@ -31,11 +27,8 @@ export default function YocoPayment({ cart, setSuccess, setToken }) {
               alert(`error occured: ${errorMessage}`)
             } else {
               console.log(result)
-              //dispatch(placeOrder(result.id, 1))
               setSuccess(true)
               setToken(result.id)
-
-              //alert(`card successfully tokenised: ${result.id}`)
             }
           },
         })
@@ -47,7 +40,6 @@ export default function YocoPayment({ cart, setSuccess, setToken }) {
     <>
       <div className={`${styles.payBtn} btn light`} id="checkout-button">
         Payment with Yoco
-        {console.log(String(handleTotalPrice(cart)).replace(".", ""))}
       </div>
       <div className={`${styles.secure} lighter`}>secured by {yocoLogo}</div>
     </>

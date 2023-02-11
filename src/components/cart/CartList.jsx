@@ -14,7 +14,6 @@ export default function Cart({ setShowModal }) {
   const state = useSelector((state) => state)
   const { numberCart, cart } = state.cart
   const dispatch = useDispatch()
-  const router = useRouter()
 
   const handlePriceDetails = (product) => {
     if (product.quantity > 1) {

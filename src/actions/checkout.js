@@ -9,8 +9,6 @@ export const placeOrder = createAsyncThunk(
     { getState, dispatch, rejectWithValue },
   ) => {
     try {
-      console.log(charge_id, pay_choice)
-
       const { cart } = getState().cart
       const { deliveryA, billingA } = getState().checkout
       const params = {
@@ -19,7 +17,6 @@ export const placeOrder = createAsyncThunk(
         delivery_address: deliveryA,
         order_items: cart,
       }
-      console.log(params)
       if (deliveryA.sameAs) params.sameAs = deliveryA.sameAs
       else {
         params.billing_address = billingA

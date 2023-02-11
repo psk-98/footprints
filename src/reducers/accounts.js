@@ -18,7 +18,6 @@ export const accountsSlice = createSlice({
       state.loading = true
     })
     buidler.addCase(login.fulfilled, (state, action) => {
-      console.log(action)
       state.loading = false
       state.user = action.payload.res.data.user
       state.isAuthenticated = true

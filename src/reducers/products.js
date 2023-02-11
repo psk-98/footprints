@@ -87,7 +87,6 @@ export const productsSlice = createSlice({
       state.sLoading = false
     })
     builder.addCase(getSearchedProducts.rejected, (state, action) => {
-      console.log(action)
       state.sError = action.payload
       state.sLoading = false
     })
