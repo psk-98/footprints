@@ -1,15 +1,17 @@
 import PageWrapper from "@/components/layout/PageWrapper"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import styles from "@/styles/Checkout.module.css"
 import { handleTotalPrice } from "@/components/cart/helpers"
 import Link from "next/link"
 import { useRouter } from "next/router"
+import { updateOrderSuccess } from "@/reducers/checkout"
 
 export default function OrderConfirmation() {
   const state = useSelector((state) => state)
   const { cart } = state.cart
   const { deliveryA } = state.checkout
   const router = useRouter()
+  const dispatch = useDispatch()
 
   const handlePriceDetails = (product) => {
     if (product.quantity > 1) {
@@ -56,7 +58,7 @@ export default function OrderConfirmation() {
             <div className={styles.deliveryInfo}>{deliveryA?.email}</div>
             <div className={styles.deliveryInfo}>{deliveryA?.number}</div>
             <div className={styles.deliveryInfo}>
-              {deliveryA?.address} {deliveryA?.city}, {deliveryA?.province}
+              {deliveryA?.address} {deliveryA?.city}, {deliveryA?.province}{" "}
               {deliveryA?.country}
             </div>
           </div>
@@ -81,7 +83,13 @@ export default function OrderConfirmation() {
           <div>Total</div>
           <div>R {handleTotalPrice(cart).toFixed(2)}</div>
         </div>
-        <div className={`${styles.payBtn} btn light`} id="checkout-button">
+        <div
+          className={`${styles.payBtn} btn light`}
+          onClick={() => {
+            dispatch(updateOrderSuccess(false))
+            router.push("/")
+          }}
+        >
           Continue shopping
         </div>
       </div>

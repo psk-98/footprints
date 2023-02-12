@@ -14,6 +14,9 @@ export const checkoutSlice = createSlice({
     updateRedirect: (state, action) => {
       state.redirect = action.payload
     },
+    updateOrderSuccess: (state, action) => {
+      state.orderSucess = action.payload
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(placeOrder.pending, (state, action) => {
@@ -33,4 +36,5 @@ export const checkoutSlice = createSlice({
   },
 })
 
-export const { updateAddress, updateBilling } = checkoutSlice.actions
+export const { updateAddress, updateBilling, updateOrderSuccess } =
+  checkoutSlice.actions

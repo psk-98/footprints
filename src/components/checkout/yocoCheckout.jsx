@@ -1,9 +1,7 @@
 import styles from "@/styles/Checkout.module.css"
 import { yocoLogo } from "public/svgs"
 import { useEffect } from "react"
-import { useDispatch } from "react-redux"
 import { handleTotalPrice } from "../cart/helpers"
-import { placeOrder } from "@/actions/checkout"
 
 export default function YocoPayment({ cart, setSuccess, setToken }) {
   useEffect(() => {
@@ -14,13 +12,14 @@ export default function YocoPayment({ cart, setSuccess, setToken }) {
 
     script.onload = () => {
       const yoco = new window.YocoSDK({
-        publicKey: "pk_test_ed3c54a6gOol69qa7f45",
+        publicKey: process.env.NEXT_PUBLIC_YOCO_PUBLIC_KEY,
       })
       const checkoutButton = document.querySelector("#checkout-button")
       checkoutButton.addEventListener("click", () => {
         yoco.showPopup({
           amountInCents: String(handleTotalPrice(cart)).replace(".", ""),
           currency: "ZAR",
+          name: "For card number use 4111 1111 1111 1111, 12/25 for date and 123 for cvv",
           callback: (result) => {
             if (result.error) {
               const errorMessage = result.error.message

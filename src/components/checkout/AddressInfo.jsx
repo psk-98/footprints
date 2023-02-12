@@ -15,7 +15,7 @@ export default function Shipping({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues: { sameAs: true } })
+  } = useForm({ defaultValues: { sameAs: false } })
 
   const dispatch = useDispatch()
   const router = useRouter()
@@ -92,7 +92,7 @@ export default function Shipping({
                     required: true,
                     pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
                   })}
-                  placeholder="email address"
+                  placeholder="Email address*"
                 />
                 {errors?.email?.type === "required" && (
                   <p>This field is required</p>
@@ -108,7 +108,7 @@ export default function Shipping({
                     required: true,
                     minLength: 10,
                   })}
-                  placeholder="Phone number"
+                  placeholder="Phone number*"
                 />
                 {errors?.number?.type === "required" && (
                   <p>This field is required</p>
@@ -126,7 +126,7 @@ export default function Shipping({
                 pattern: /^[A-Za-z]+$/i,
                 maxLength: 30,
               })}
-              placeholder="Name"
+              placeholder="Name*"
             />
             {errors?.name?.type === "required" && <p>This field is required</p>}
             {errors?.name?.type === "maxLength" && (
@@ -148,7 +148,7 @@ export default function Shipping({
           <div className={formStyles.inputGroup}>
             <input
               {...register("address", { required: true })}
-              placeholder="Address"
+              placeholder="Address*"
             />
             {errors?.address?.type === "required" && (
               <p>This field is required</p>
@@ -158,7 +158,7 @@ export default function Shipping({
             <input
               type={"number"}
               {...register("postal", { required: true })}
-              placeholder="Postal code"
+              placeholder="Postal code*"
             />
             {errors?.postal?.type === "required" && (
               <p>This field is required</p>
@@ -167,7 +167,7 @@ export default function Shipping({
           <div className={formStyles.inputGroup}>
             <input
               {...register("city", { required: true })}
-              placeholder="City"
+              placeholder="City*"
             />
             {errors?.city?.type === "required" && <p>This field is required</p>}
           </div>

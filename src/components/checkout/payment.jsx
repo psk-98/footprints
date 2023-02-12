@@ -5,6 +5,7 @@ import { placeOrder } from "@/actions/checkout"
 import styles from "@/styles/Checkout.module.css"
 import YocoPayment from "./yocoCheckout"
 import { handleTotalPrice } from "../cart/helpers"
+import { clearCart } from "@/reducers/cart"
 
 export default function Payment() {
   const [isSuccess, setSuccess] = useState(false)
@@ -17,7 +18,10 @@ export default function Payment() {
   const { deliveryA, orderSucess } = state.checkout
 
   useEffect(() => {
-    if (orderSucess) router.push("/orderconfirmation")
+    if (orderSucess) {
+      dispatch(clearCart())
+      router.push("/orderconfirmation")
+    }
   }, [orderSucess])
 
   const dispatch = useDispatch()

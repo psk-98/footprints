@@ -40,6 +40,7 @@ export default function Home() {
       path={router.asPath}
       desc="This is the home page of FootPrints a mock online store"
     >
+      {console.log(process.env.NEXT_PUBLIC_GREET)}
       <Hero />
       <Slider
         header="Shop for women"
