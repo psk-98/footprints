@@ -32,11 +32,14 @@ export const productsSlice = createSlice({
     updateSize: (state, action) => {
       state.selectedSize = action.payload
     },
+    clearSize: (state) => {
+      state.selectedSize = null
+    },
     updatePanel: (state) => {
       state.panelStatus = !state.panelStatus
     },
     clearSProducts: (state) => {
-      state.sProducts = []
+      state.sProducts = null
       state.sNumProducts = 0
       state.sLoading = false
     },
@@ -112,4 +115,5 @@ export const {
   updateSearch,
   clearSProducts,
   updateNewSearch,
+  clearSize,
 } = productsSlice.actions

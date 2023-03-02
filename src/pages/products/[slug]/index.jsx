@@ -1,18 +1,18 @@
-import styles from "@/styles/Products.module.css"
-import PageWrapper from "@/components/layout/PageWrapper"
-import { useRouter } from "next/router"
-import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState } from "react"
-import ProductCards from "@/components/products/products"
-import Paginator from "@/components/products/paginator"
-import Filterbar from "@/components/products/filterbar"
 import { getProducts } from "@/actions/products"
+import { containerVariants } from "@/animations/routes"
+import Loader from "@/components/layout/loader"
+import PageWrapper from "@/components/layout/PageWrapper"
+import Filterbar from "@/components/products/filterbar"
+import Paginator from "@/components/products/paginator"
+import ProductCards from "@/components/products/products"
 import { updateSlug } from "@/reducers/params"
 import { clearSProducts, updateNewSearch } from "@/reducers/products"
-import { sortFilter } from "public/svgs"
-import Loader from "@/components/layout/loader"
-import { containerVariants } from "@/animations/routes"
+import styles from "@/styles/Products.module.css"
 import { motion } from "framer-motion"
+import { useRouter } from "next/router"
+import { sortFilter } from "public/svgs"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 
 export default function Products() {
   const router = useRouter()
@@ -38,7 +38,14 @@ export default function Products() {
   return loading ? (
     <Loader loading={loading} />
   ) : error ? (
-    <>{error?.message}</>
+    <PageWrapper
+      key={loading + router.route + slug}
+      title="Products"
+      path={router.asPath}
+      desc="This is the products view page of FootPrints a mock online store"
+    >
+      <div className="error">{error.message}</div>
+    </PageWrapper>
   ) : (
     <PageWrapper
       key={loading + router.route + slug}

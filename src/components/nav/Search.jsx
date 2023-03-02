@@ -1,23 +1,21 @@
-import styles from "@/styles/Nav.module.css"
-import loaderStyles from "@/styles/Loader.module.css"
+import { getSearchedProducts } from "@/actions/products"
+import { loaderVariants, wrapperVariants } from "@/animations/loader"
+import { containerVariants } from "@/animations/routes"
 import {
   clearSProducts,
   updateNewSearch,
   updateSearch,
 } from "@/reducers/products"
-import { useDispatch, useSelector } from "react-redux"
-import { getSearchedProducts } from "@/actions/products"
-import Image from "next/image"
-import { useRouter } from "next/router"
-import Link from "next/link"
+import styles from "@/styles/Nav.module.css"
 import { motion } from "framer-motion"
-import { containerVariants } from "@/animations/routes"
-import { loaderVariants, wrapperVariants } from "@/animations/loader"
+import Image from "next/image"
+import Link from "next/link"
+import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 
 export default function Search({ setIsSearch }) {
   const router = useRouter()
-  const [loading, setLoading] = useState(true)
   const [maxProducts, setMaxProducts] = useState(3)
 
   const disptach = useDispatch()
@@ -145,6 +143,9 @@ export default function Search({ setIsSearch }) {
               >
                 View {sNumProducts} results
               </motion.div>
+            )}
+            {sProducts?.length === 0 && (
+              <div className={styles.noResults}>No matches</div>
             )}
           </>
         )}

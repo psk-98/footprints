@@ -65,6 +65,23 @@ input::-webkit-inner-spin-button {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+.alertWrapper {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  z-index: 3;
+  width: 100%;
+}
+.alertWrapper .alert {
+  background: rgba(240, 0, 0, 0.8);
+  color: #eee;
+  width: fit-content;
+  padding: 2rem;
+}
+.error {
+  text-align: center;
+  margin: 7rem 0;
+}
 @media (min-width: 768px) {
   * {
     font-size: 3rem;

@@ -110,12 +110,13 @@
 }
 .searchResults {
   height: 92vh;
-  max-width: 100vw;
-  width: 100%;
+  max-width: 100%;
+  min-width: 80%;
   top: 8vh;
   padding: 0 3rem;
   background: #eee;
   left: 0;
+  right: 0;
   position: absolute;
 }
 .searchResult {
@@ -124,6 +125,11 @@
 .searchResult a {
   display: flex;
   align-items: center;
+}
+.noResults {
+  width: 100%;
+  text-align: center;
+  margin: 4rem 0;
 }
 .imgWrapper {
   width: 25%;

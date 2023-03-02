@@ -1,17 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 //import { normalizeCat } from "../components/products/helpers"
-import { GET_PRODUCTS, BASE_URL, GET_NEW_PAGE, GET_PRODUCT } from "./type"
+import { BASE_URL, GET_NEW_PAGE, GET_PRODUCT, GET_PRODUCTS } from "./type"
 
 export const getProducts = createAsyncThunk(
   GET_PRODUCTS,
   async (something, { getState, rejectWithValue }) => {
     try {
       const { pageSize, sort, priceFrom, priceTo, slug } = getState().params
+
       let params = { page_size: pageSize, sort: sort }
       if (something === true) params.search = getState().products?.search
       else if (slug === "men" || slug === "women") params.category = slug
       if (something === "home") params.page_size = 24
+      console.log(params)
 
       if (priceFrom) params.filterFromPrice = priceFrom
       if (priceTo) params.filterToPrice = priceTo

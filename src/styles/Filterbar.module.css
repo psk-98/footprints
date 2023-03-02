@@ -66,6 +66,9 @@
   width: 100%;
   margin: 0 0 5rem 0;
 }
+.panelReset div {
+  font-size: 2rem;
+}
 .applyBtn {
   background-color: #050505;
   border: 1px solid #050505;

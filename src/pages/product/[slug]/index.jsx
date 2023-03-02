@@ -1,18 +1,21 @@
+import Alert from "@/components/common/alert"
+import { clearSize } from "@/reducers/products"
 import { useRouter } from "next/router"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getProduct } from "../../../actions/products"
 import Slider from "../../../components/common/productSlider"
 import Loader from "../../../components/layout/loader"
+import PageWrapper from "../../../components/layout/PageWrapper"
 import Desc from "../../../components/product/desc"
 import Images from "../../../components/product/productImgs"
 import Sizes from "../../../components/product/productSizes"
-import styles from "../../../styles/Product.module.css"
-import { updateSlug } from "../../../reducers/params"
 import { addToCart, clearCart } from "../../../reducers/cart"
-import PageWrapper from "../../../components/layout/PageWrapper"
+import { updateSlug } from "../../../reducers/params"
+import styles from "../../../styles/Product.module.css"
 
 export default function Product() {
+  const [isAlert, setAlert] = useState(false)
   const state = useSelector((state) => state)
   const dispatch = useDispatch()
   const router = useRouter()
@@ -25,6 +28,10 @@ export default function Product() {
     dispatch(updateSlug(slug))
   }, [slug])
 
+  useEffect(() => {
+    dispatch(clearSize())
+  }, [])
+
   return loading ? (
     <Loader loading={loading} />
   ) : error ? (
@@ -36,6 +43,7 @@ export default function Product() {
       path={router.asPath}
       desc="This is the product view of FootPrints a mock online store"
     >
+      {isAlert && <Alert msg={"Select a size"} isAlert={isAlert} />}
       <div className="contained">
         <div className={styles.productCard}>
           <Images product={product} />
@@ -57,7 +65,14 @@ export default function Product() {
                   className={`${styles.addCart} btn`}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => {
-                    dispatch(addToCart({ product, size: selectedSize }))
+                    if (selectedSize)
+                      dispatch(addToCart({ product, size: selectedSize }))
+                    else {
+                      setAlert(true)
+                      setTimeout(() => {
+                        setAlert(false)
+                      }, 3000)
+                    }
                   }}
                 >
                   Add to bag
