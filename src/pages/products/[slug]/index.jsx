@@ -40,7 +40,7 @@ export default function Products() {
   ) : error ? (
     <PageWrapper
       key={loading + router.route + slug}
-      title="Products"
+      title="Products Error"
       path={router.asPath}
       desc="This is the products view page of FootPrints a mock online store"
     >

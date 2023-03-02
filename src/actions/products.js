@@ -13,8 +13,6 @@ export const getProducts = createAsyncThunk(
       if (something === true) params.search = getState().products?.search
       else if (slug === "men" || slug === "women") params.category = slug
       if (something === "home") params.page_size = 24
-      console.log(params)
-
       if (priceFrom) params.filterFromPrice = priceFrom
       if (priceTo) params.filterToPrice = priceTo
       const res = await axios.get(`${BASE_URL}/products/`, {

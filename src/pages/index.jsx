@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from "react-redux"
-import PageWrapper from "@/components/layout/PageWrapper"
-import { useEffect } from "react"
 import { getProducts } from "@/actions/products"
-import Hero from "@/components/home/Hero"
 import Slider from "@/components/common/productSlider"
+import Hero from "@/components/home/Hero"
 import Loader from "@/components/layout/loader"
+import PageWrapper from "@/components/layout/PageWrapper"
 import { useRouter } from "next/router"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -40,7 +40,6 @@ export default function Home() {
       path={router.asPath}
       desc="This is the home page of FootPrints a mock online store"
     >
-      {console.log(process.env.NEXT_PUBLIC_GREET)}
       <Hero />
       <Slider
         header="Shop for women"

@@ -14,7 +14,7 @@ const masterReducer = (state, action) => {
 }
 
 export const store = () => {
-  return configureStore({ reducer: masterReducer })
+  return configureStore({ reducer: masterReducer, devTools: false })
 }
 
 export const wrapper = createWrapper(store)

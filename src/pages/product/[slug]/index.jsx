@@ -35,7 +35,14 @@ export default function Product() {
   return loading ? (
     <Loader loading={loading} />
   ) : error ? (
-    <div className="error-msg">{error?.message}!</div>
+    <PageWrapper
+      key={loading + router.route + slug}
+      title="Product Error"
+      path={router.asPath}
+      desc="This is the product view page of FootPrints a mock online store"
+    >
+      <div className="error">{error.message}</div>
+    </PageWrapper>
   ) : (
     <PageWrapper
       key={loading}
