@@ -7,16 +7,31 @@ import { Provider } from "react-redux"
 function App({ Component, router, ...rest }) {
   const { store, props } = wrapper.useWrappedStore(rest)
   return (
-    <Provider store={store}>
-      <Layout>
-        <AnimatePresence
-          mode="wait"
-          onExitComplete={() => window.scrollTo(0, 0)}
-        >
-          <Component {...props.pageProps} key={router.route} />
-        </AnimatePresence>
-      </Layout>
-    </Provider>
+    <>
+      <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-2VNZVQ54PG"
+      />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}',{page_path: window.location.pathname,} );`,
+        }}
+      />
+
+      <Provider store={store}>
+        <Layout>
+          <AnimatePresence
+            mode="wait"
+            onExitComplete={() => window.scrollTo(0, 0)}
+          >
+            <Component {...props.pageProps} key={router.route} />
+          </AnimatePresence>
+        </Layout>
+      </Provider>
+    </>
   )
 }
 
