@@ -14,8 +14,9 @@ export default function Hero() {
         <div className={styles.heroBackground}>
           <Image
             src="/sneakers.webp"
-            height={window?.innerHeight || 500}
-            width={window?.innerWidth || 300}
+            fill
+            sizes="100vw"
+            placeholder="blur"
             alt="sneaker picture"
             priority
           />
