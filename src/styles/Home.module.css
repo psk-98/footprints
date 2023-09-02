@@ -14,7 +14,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  height: 100vh;
+  height: 72vh;
   width: 100vw;
   max-width: 100vw;
   max-height: 100vh;
@@ -130,12 +130,12 @@
   }
 }
 @media (min-width: 1024px) {
-  .landing {
+  .landing,
+  .heroBackground {
     height: 100vh;
   }
   .sliderCard {
     min-width: 28rem;
     max-width: 28rem;
-    border: ;
   }
 }
