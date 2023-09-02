@@ -1,11 +1,11 @@
-import Footer from "./Footer"
 import { Montserrat } from "@next/font/google"
-import Meta from "./Meta"
 import { NextSeo } from "next-seo"
 import Nav from "../nav/Nav"
+import Footer from "./Footer"
+import Meta from "./Meta"
 
 const montserrat = Montserrat({
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500"],
   subsets: ["latin"],
 })
 

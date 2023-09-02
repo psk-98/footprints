@@ -2,6 +2,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { useSelector } from "react-redux"
+import { getRightProductsPageImageSize } from "utils/imagesUtils"
 import styles from "../../styles/Products.module.css"
 
 export default function ProductCards() {
@@ -29,8 +30,8 @@ export default function ProductCards() {
               <Link href={`/product/${product.slug}`}>
                 <div className={styles.imgWrapper}>
                   <Image
-                    width={window.innerWidth * 0.25 || 400}
-                    height={window.innerWidth * 0.25 || 400}
+                    width={getRightProductsPageImageSize()}
+                    height={getRightProductsPageImageSize()}
                     src={product.product_images[0].get_image.replace(/\s+/, "")}
                     alt={product.name}
                     priority
