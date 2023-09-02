@@ -1,8 +1,8 @@
+import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { useSelector } from "react-redux"
 import styles from "../../styles/Products.module.css"
-import { motion } from "framer-motion"
 
 export default function ProductCards() {
   const state = useSelector((state) => state)
@@ -29,8 +29,8 @@ export default function ProductCards() {
               <Link href={`/product/${product.slug}`}>
                 <div className={styles.imgWrapper}>
                   <Image
-                    width={800}
-                    height={800}
+                    width={window.innerWidth * 0.25 || 400}
+                    height={window.innerWidth * 0.25 || 400}
                     src={product.product_images[0].get_image.replace(/\s+/, "")}
                     alt={product.name}
                     priority

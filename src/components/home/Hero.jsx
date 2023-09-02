@@ -1,6 +1,7 @@
 import styles from "@/styles/Home.module.css"
 import Image from "next/image"
 import { useRouter } from "next/router"
+import backImg from "../../../public/sneakers.webp"
 
 export default function Hero() {
   const router = useRouter()
@@ -13,7 +14,7 @@ export default function Hero() {
       >
         <div className={styles.heroBackground}>
           <Image
-            src="/sneakers.webp"
+            src={backImg}
             fill
             sizes="100vw"
             placeholder="blur"

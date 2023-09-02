@@ -1,8 +1,8 @@
 import styles from "@/styles/Home.module.css"
-import { useRouter } from "next/router"
-import Image from "next/image"
-import { forwardArrow } from "public/svgs"
 import { motion } from "framer-motion"
+import Image from "next/image"
+import { useRouter } from "next/router"
+import { forwardArrow } from "public/svgs"
 
 export default function Slider({ header, products, link }) {
   const router = useRouter()
@@ -35,9 +35,8 @@ export default function Slider({ header, products, link }) {
                 <div className={styles.sliderImg}>
                   <Image
                     src={product.product_images[0].get_image.replace(/\s+/, "")}
-                    width="800"
-                    height="800"
-                    priority
+                    width={window?.innerWidth * 0.25 || 400}
+                    height={window?.innerWidth * 0.25 || 400}
                     placeholder="blur"
                     blurDataURL="/Logo.png"
                     alt={product.name}
