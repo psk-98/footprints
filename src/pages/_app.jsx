@@ -10,7 +10,7 @@ function App({ Component, router, ...rest }) {
     <>
       <script
         async
-        src="https://www.googletagmanager.com/gtag/js?id=G-2VNZVQ54PG"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
       />
       <script
         dangerouslySetInnerHTML={{
