@@ -10,7 +10,7 @@ const Footer = () => {
   return (
     <div className={footerStyles.footer}>
       <Link
-        href="https://twitter.com/paul_sinci"
+        href="https://www.linkedin.com/in/paul-khoza"
         target="_blank"
         rel="noreferrer"
       >
