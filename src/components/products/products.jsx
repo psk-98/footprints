@@ -1,11 +1,13 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
-import Link from "next/link"
+import { useRouter } from "next/router"
 import { useSelector } from "react-redux"
 import { getRightProductsPageImageSize } from "utils/imagesUtils"
 import styles from "../../styles/Products.module.css"
 
 export default function ProductCards() {
+  const router = useRouter()
+
   const state = useSelector((state) => state)
   const { products } = state.products
 
@@ -26,25 +28,26 @@ export default function ProductCards() {
                 },
               }}
               whileHover={{ scale: 1.05, opacity: 0.9 }}
+              onClick={() => {
+                router.push(`/product/${product.slug}`)
+              }}
             >
-              <Link href={`/product/${product.slug}`}>
-                <div className={styles.imgWrapper}>
-                  <Image
-                    width={getRightProductsPageImageSize()}
-                    height={getRightProductsPageImageSize()}
-                    src={product.product_images[0].get_image.replace(/\s+/, "")}
-                    alt={product.name}
-                    priority
-                    placeholder="blur"
-                    blurDataURL="/Logo.png"
-                  />
-                </div>
-                <div className={styles.name}>{product.name}</div>
-                <div className={`lighter ${styles.cat}`}>
-                  {product.category}
-                </div>
-                <div className={styles.price}>R {product.price.toFixed(2)}</div>
-              </Link>
+              {/* <Link href={`/product/${product.slug}`}> */}
+              <div className={styles.imgWrapper}>
+                <Image
+                  width={getRightProductsPageImageSize()}
+                  height={getRightProductsPageImageSize()}
+                  src={product.product_images[0].get_image.replace(/\s+/, "")}
+                  alt={product.name}
+                  priority
+                  placeholder="blur"
+                  blurDataURL="/Logo.png"
+                />
+              </div>
+              <div className={styles.name}>{product.name}</div>
+              <div className={`lighter ${styles.cat}`}>{product.category}</div>
+              <div className={styles.price}>R {product.price.toFixed(2)}</div>
+              {/* </Link> */}
             </motion.div>
           )
         })}
