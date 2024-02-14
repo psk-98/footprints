@@ -10,16 +10,18 @@ export default function Slider({ header, products, link }) {
       <div className={styles.productSlider}>
         <div className={styles.sliderHeader}>
           <p className="header">{header}</p>
-          <Link href={link} className={styles.sliderViewAll}>
-            view all
-            {forwardArrow}
-          </Link>
+          {link && (
+            <Link href={link} className={styles.sliderViewAll}>
+              view all
+              {forwardArrow}
+            </Link>
+          )}
         </div>
         <div className={styles.slider}>
           {products?.map((product, i) => {
             return (
               <Link
-                href={`product/${product.slug}`}
+                href={`product/${product?.slug}`}
                 className={styles.sliderCard}
                 key={product.id}
               >
@@ -35,7 +37,7 @@ export default function Slider({ header, products, link }) {
                 </div>
                 <div className={styles.productName}>{product.name}</div>
                 <Link
-                  href={`/products/${product.category}`}
+                  href={`/products/${product?.category}`}
                   className={`${styles.category} lighter`}
                 >
                   {product.category}

@@ -1,0 +1,38 @@
+.selectorWrapperLg {
+  display: none;
+}
+.selectorWrapperSm {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0 4rem 0;
+}
+.selectorWrapperSm .imgSelector {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid #050505;
+  margin: 0 4rem;
+}
+
+@media (min-width: 768px) {
+  .imgsWrapper {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 49%;
+  }
+  .imgWrapper {
+    width: 83%;
+    margin: 0 0 0 1rem;
+  }
+  .selectorWrapperLg {
+    display: flex;
+    flex-direction: column;
+    width: 16.67%;
+  }
+  .selectorWrapperSm {
+    display: none;
+  }
+  .selectorWrapperLg .imgSelector {
+    width: 100%;
+    margin: 0 0 1rem 0;
+  }
+}

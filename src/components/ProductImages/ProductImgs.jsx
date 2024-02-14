@@ -1,11 +1,12 @@
 "use client"
 
 import { imgVariants, selectorVariants } from "@/animations/product"
-import { AnimatePresence, motion } from "framer-motion"
+import { AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import { useState } from "react"
 import logoPng from "../../../public/Logo.png"
-import styles from "./Product.module.css"
+import { MotionDiv } from "../MotionComponents/MotionComponents"
+import styles from "./ProductImgs.module.css"
 
 export default function Images({ product }) {
   const [currentImg, setCurrentImg] = useState(0)
@@ -13,7 +14,7 @@ export default function Images({ product }) {
   return (
     <div className={styles.imgsWrapper}>
       <AnimatePresence mode="wait">
-        <motion.div
+        <MotionDiv
           className={styles.imgWrapper}
           key={currentImg}
           variants={imgVariants}
@@ -33,12 +34,12 @@ export default function Images({ product }) {
             priority
             blurDataURL={`data:${logoPng}`}
           />
-        </motion.div>
+        </MotionDiv>
       </AnimatePresence>
       <div className={styles.selectorWrapperSm}>
         {product?.product_images.map((selector, index) => {
           return (
-            <motion.div
+            <MotionDiv
               className={styles.imgSelector}
               key={index}
               initial={false}
@@ -47,14 +48,14 @@ export default function Images({ product }) {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setCurrentImg(index)}
-            ></motion.div>
+            ></MotionDiv>
           )
         })}
       </div>
       <div className={styles.selectorWrapperLg}>
         {product?.product_images.map((selector, index) => {
           return (
-            <motion.div
+            <MotionDiv
               className={styles.imgSelector}
               key={index}
               onClick={() => setCurrentImg(index)}
@@ -92,7 +93,7 @@ export default function Images({ product }) {
                   index
                 ].get_image.replace(/\s+/, "")}`}
               />
-            </motion.div>
+            </MotionDiv>
           )
         })}
       </div>
