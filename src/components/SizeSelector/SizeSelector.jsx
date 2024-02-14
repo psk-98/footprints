@@ -8,11 +8,11 @@ import styles from "./SizeSelector.module.css"
 
 export default function SizeSelector({ product }) {
   const [selectedSize, setSelectedSize] = useState(null)
-
+  console.log(product)
   return (
     <>
       <div className={styles.productSizes}>
-        {product?.product_stock ? (
+        {product?.product_stock !== 0 ? (
           product?.product_stock?.map((stock, i) => {
             return (
               <MotionDiv
@@ -35,7 +35,7 @@ export default function SizeSelector({ product }) {
           </>
         )}
       </div>
-      <BuyCartButtons selectedSize={selectedSize} />
+      <BuyCartButtons product={product} selectedSize={selectedSize} />
     </>
   )
 }

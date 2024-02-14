@@ -5,16 +5,22 @@ import {
   navVariants,
 } from "@/animations/nav"
 import { containerVariants } from "@/animations/routes"
+import { useAppSelector } from "@/store/hooks"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import { cartIcon, footprintsLogo, searchIcon } from "../../../public/svgs"
+import {
+  cartIcon,
+  emptyCartIcon,
+  footprintsLogo,
+  searchIcon,
+} from "../../../public/svgs"
 import styles from "./Nav.module.css"
 
 export default function NavTop({ toggle, setToggle, isSearch, setIsSearch }) {
   // const [isSearch, setIsSearch] = useState(false)
   // below is for cart icon
-  // const state = useSelector((state) => state)
+  const { cart } = useAppSelector((state) => state)
 
   const [show, setShow] = useState(false)
   const [lastScrollY, setLastScrollY] = useState(0)
@@ -98,8 +104,7 @@ export default function NavTop({ toggle, setToggle, isSearch, setIsSearch }) {
             </div>
             <Link href="/cart">
               <div className={styles.navItem}>
-                {/* {state.cart.cart.length === 0 ? emptyCartIcon : cartIcon} */}
-                {cartIcon}
+                {cart.cart.length === 0 ? emptyCartIcon : cartIcon}
               </div>
             </Link>
           </div>

@@ -34,7 +34,7 @@ export default async function Product({ params }) {
             {product?.product_stock.length === 0 ? (
               <div className={`${styles.addCart} btn`}>Sold out</div>
             ) : (
-              <SizeSelector />
+              <SizeSelector product={product} />
             )}
           </div>
           <div className={styles.productDesc}>{product?.description}</div>

@@ -2,10 +2,12 @@ import { containerVariants } from "@/animations/routes"
 import Footer from "@/components/Footer/Footer"
 import { MotionDiv } from "@/components/MotionComponents/MotionComponents"
 import Nav from "@/components/Nav/Nav"
+import { store } from "@/store/store"
 import { Montserrat } from "next/font/google"
 import { Suspense } from "react"
 import "./globals.css"
 import Loading from "./loading"
+import StoreProvider from "./storeProvider"
 
 const montserrat = Montserrat({
   weight: ["400", "500"],
@@ -21,17 +23,19 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <Nav />
-        <MotionDiv
-          className="container"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-        >
-          <Suspense fallback={<Loading />}>{children}</Suspense>
-        </MotionDiv>
-        <Footer />
+        <StoreProvider store={store}>
+          <Nav />
+          <MotionDiv
+            className="container"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <Suspense fallback={<Loading />}>{children}</Suspense>
+          </MotionDiv>
+          <Footer />
+        </StoreProvider>
       </body>
     </html>
   )
