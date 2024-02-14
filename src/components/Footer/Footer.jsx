@@ -78,7 +78,7 @@ const Footer = () => {
           target="_blank"
           rel="noreferrer"
           whileHover={{ scale: 1.3 }}
-          whileTap={{ scale: 0.95 }}
+          whileTap={{ scale: 0.94 }}
         >
           Paul Khoza
         </MotionAnchor>
