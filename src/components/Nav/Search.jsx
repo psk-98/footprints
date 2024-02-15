@@ -1,33 +1,38 @@
-import { getSearchedProducts } from "@/actions/products"
 import { loaderVariants, wrapperVariants } from "@/animations/loader"
 import { containerVariants } from "@/animations/routes"
-import {
-  clearSProducts,
-  updateNewSearch,
-  updateSearch,
-} from "@/reducers/products"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
-import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import styles from "./Nav.module.css"
 
 export default function Search({ setIsSearch }) {
-  const router = useRouter()
+  // const router = useRouter()
   const [maxProducts, setMaxProducts] = useState(3)
-
+  const [loading, setLoading] = useState(false)
+  const [products, setProducts] = useState(null)
+  const [productsCount, setProductsCount] = useState(null)
+  const [searchPhase, setPhase] = useState(null)
   const disptach = useDispatch()
 
-  const state = useSelector((state) => state)
-  const { sProducts, sLoading, sNumProducts } = state.products
+  const handleSearch = async (search) => {
+    setLoading(true)
+    const res = await fetch(
+      `https://psk98.pythonanywhere.com/api/products/?page_size=24&sort=-date_added&search=${search}`
+    )
+    const { results, count } = await res.json()
+    setProducts(results)
+    setProductsCount(count)
+    setLoading(false)
+    setPhase(search)
+  }
 
   useEffect(() => {
-    if (screen.width >= 1024) setMaxProducts(6)
-    else if (screen.width >= 768) setMaxProducts(4)
+    if (screen?.width >= 1024) setMaxProducts(6)
+    else if (screen?.width >= 768) setMaxProducts(4)
     else setMaxProducts(3)
-  }, [screen.width])
+  }, [screen?.width])
 
   return (
     <>
@@ -41,8 +46,7 @@ export default function Search({ setIsSearch }) {
           placeholder="What are you looking for?"
           onChange={(e) => {
             if (e.target.value.length === 0) console.log("Empty")
-            disptach(updateSearch(e.target.value))
-            disptach(getSearchedProducts())
+            handleSearch(e.target.value)
           }}
         />
         <motion.div
@@ -52,7 +56,6 @@ export default function Search({ setIsSearch }) {
           initial="hidden"
           onClick={() => {
             setIsSearch(false)
-            disptach(clearSProducts())
           }}
         >
           cancel
@@ -63,7 +66,7 @@ export default function Search({ setIsSearch }) {
         initial={{ height: 0 }}
         animate={{ height: "fit-content" }}
       >
-        {sLoading ? (
+        {loading ? (
           <motion.div
             className={styles.loaderWrapper}
             variants={wrapperVariants}
@@ -83,8 +86,8 @@ export default function Search({ setIsSearch }) {
           </motion.div>
         ) : (
           <>
-            {sProducts &&
-              sProducts.slice(0, maxProducts).map((product, i) => {
+            {products &&
+              products.slice(0, maxProducts).map((product, i) => {
                 return (
                   <motion.div
                     className={styles.searchResult}
@@ -124,27 +127,30 @@ export default function Search({ setIsSearch }) {
                   </motion.div>
                 )
               })}
-            {sNumProducts > maxProducts && (
-              <motion.div
-                className={`${styles.viewRes} light`}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                  transition: {
-                    delay: 1 + 0.15 * (maxProducts + 1),
-                  },
-                }}
-                onClick={() => {
-                  disptach(updateNewSearch(true))
-                  setIsSearch(false)
-                  router.push("/products/search")
+            {productsCount > maxProducts && (
+              <Link
+                href={{
+                  pathname: "/products/search",
+                  query: { search: searchPhase },
                 }}
               >
-                View {sNumProducts} results
-              </motion.div>
+                <motion.div
+                  className={`${styles.viewRes} light`}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      delay: 1 + 0.15 * (maxProducts + 1),
+                    },
+                  }}
+                  onClick={() => setIsSearch(false)}
+                >
+                  View {productsCount} results
+                </motion.div>{" "}
+              </Link>
             )}
-            {sProducts?.length === 0 && (
+            {products?.length === 0 && (
               <div className={styles.noResults}>No matches</div>
             )}
           </>

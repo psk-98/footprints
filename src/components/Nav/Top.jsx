@@ -16,6 +16,7 @@ import {
   searchIcon,
 } from "../../../public/svgs"
 import styles from "./Nav.module.css"
+import Search from "./Search"
 
 export default function NavTop({ toggle, setToggle, isSearch, setIsSearch }) {
   // const [isSearch, setIsSearch] = useState(false)
@@ -58,8 +59,7 @@ export default function NavTop({ toggle, setToggle, isSearch, setIsSearch }) {
       animate={show || toggle || isSearch ? "none" : "transparent"}
     >
       {isSearch ? (
-        // <Search setIsSearch={setIsSearch} />
-        <>Search here</>
+        <Search setIsSearch={setIsSearch} />
       ) : (
         <>
           <motion.div

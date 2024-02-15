@@ -1,30 +1,36 @@
 import { containerVariants } from "@/animations/routes"
+import Filterbar from "@/components/FilterBar/Filterbar"
 import { MotionDiv } from "@/components/MotionComponents/MotionComponents"
 import ProductCards from "@/components/Products/Products"
 import styles from "@/components/Products/Products.module.css"
-import { sortFilter } from "../../../../public/svgs"
+import Paginator from "@/components/ProductsPaginator/Paginator"
+import axios from "axios"
 
 async function getProducts({ params, searchParams }) {
-  if (params.slug !== "all") {
-    const res = await fetch(
-      `https://psk98.pythonanywhere.com/api/products/?page_szie=24&category=${params?.slug}`
-    )
-    const data = await res.json()
-    return data
+  let url = "https://psk98.pythonanywhere.com/api/products"
+
+  let _params = { page_size: 12, ...searchParams }
+
+  if (params.slug !== "all" && params.slug !== "search") {
+    _params.category = params.slug
+
+    try {
+      const res = await axios.get(url, { params: _params })
+      const { data } = res
+      return data
+    } catch (err) {
+      console.log(err)
+    }
   } else {
-    const res = await fetch(
-      `https://psk98.pythonanywhere.com/api/products/?page_szie=24`
-    )
-    const data = await res.json()
+    const res = await axios.get(url, { params: _params })
+    const { data } = res
     return data
   }
 }
 
 export default async function Product(props) {
   const products = await getProducts(props)
-
-  const { count, results } = await products
-  console.log(await products)
+  const { count, results, previous, next } = await products
 
   return (
     <>
@@ -37,21 +43,9 @@ export default async function Product(props) {
         >
           {props.params.slug}
         </MotionDiv>
-        <MotionDiv
-          className={styles.settingsWrapper}
-          variants={containerVariants}
-        >
-          <div
-            className={styles.sortFilter}
-            // onClick={() => setPanel(true)}
-          >
-            {sortFilter}
-            filter & sort
-          </div>
-          <div className={styles.numShow}>{count} products</div>
-        </MotionDiv>
+        <Filterbar count={count} />
         <ProductCards products={results} />
-        {/* <Paginator /> */}
+        <Paginator next={next} previous={previous} props={props} />
       </div>
     </>
   )

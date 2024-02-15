@@ -1,3 +1,4 @@
+import Filterbar from "@/components/FilterBar/Filterbar"
 import Desc from "@/components/OtherProductDetails/Desc"
 import Images from "@/components/ProductImages/ProductImgs"
 import Slider from "@/components/ProductSlider/ProductSlider"
@@ -5,6 +6,8 @@ import SizeSelector from "@/components/SizeSelector/SizeSelector"
 import Link from "next/link"
 import styles from "./Product.module.css"
 
+// import { usePathname, useSearchParams } from 'next/navigation'
+// useSearchParams gives you the query params
 async function getProduct({ slug }) {
   const res = await fetch(
     `https://psk98.pythonanywhere.com/api/product/?slug=${slug}`
@@ -15,6 +18,16 @@ async function getProduct({ slug }) {
 }
 
 export default async function Product({ params }) {
+  // const createQueryString = useCallback(
+  //   (name, value) => {
+  //     const params = new URLSearchParams(searchParams)
+  //     params.set(name, value)
+
+  //     return params.toString()
+  //   },
+  //   [searchParams]
+  // )
+
   const product = await getProduct(params)
   console.log(await product)
   return (

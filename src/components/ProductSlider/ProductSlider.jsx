@@ -1,3 +1,4 @@
+import { newest } from "@/utils/productSortTypes"
 import Image from "next/image"
 import Link from "next/link"
 import { forwardArrow } from "../../../public/svgs"
@@ -11,7 +12,10 @@ export default function Slider({ header, products, link }) {
         <div className={styles.sliderHeader}>
           <p className="header">{header}</p>
           {link && (
-            <Link href={link} className={styles.sliderViewAll}>
+            <Link
+              href={{ pathname: link, query: { sort: newest } }}
+              className={styles.sliderViewAll}
+            >
               view all
               {forwardArrow}
             </Link>

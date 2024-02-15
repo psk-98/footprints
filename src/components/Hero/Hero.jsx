@@ -1,3 +1,4 @@
+import { newest } from "@/utils/productSortTypes"
 import Image from "next/image"
 import Link from "next/link"
 import backImg from "../../../public/sneakers.webp"
@@ -20,7 +21,10 @@ export default function Hero() {
         <div className={`${styles.heroDesc} light`}>
           where style meets comfort
         </div>
-        <Link href="/products/all" className={`${styles.shopBtn} light btn`}>
+        <Link
+          href={{ pathname: "/products/all", query: { sort: newest } }}
+          className={`${styles.shopBtn} light btn`}
+        >
           Shop now
         </Link>
       </div>

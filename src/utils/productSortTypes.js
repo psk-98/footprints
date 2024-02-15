@@ -1,0 +1,6 @@
+export const lowHighPrice = "price"
+export const highLowPrice = "-price"
+export const aToZName = "name"
+export const zToAName = "-name"
+export const newest = "-date_added"
+export const oldest = "date_added"
