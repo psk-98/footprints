@@ -1,6 +1,10 @@
 import Hero from "@/components/Hero/Hero"
 import Slider from "@/components/ProductSlider/ProductSlider"
 
+export const metadata = {
+  title: "Home | Footprints",
+}
+
 async function getProducts() {
   const res = await fetch(
     "https://psk98.pythonanywhere.com/api/products/?page_size=24&sort=-date_added"

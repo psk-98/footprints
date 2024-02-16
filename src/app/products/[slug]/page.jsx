@@ -6,6 +6,29 @@ import styles from "@/components/Products/Products.module.css"
 import Paginator from "@/components/ProductsPaginator/Paginator"
 import axios from "axios"
 
+export default async function Product(props) {
+  const products = await getProducts(props)
+  const { count, results, previous, next } = await products
+
+  return (
+    <>
+      <div className="contained">
+        <MotionDiv
+          className={`${styles.header} header`}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {props.params.slug}
+        </MotionDiv>
+        <Filterbar count={count} />
+        <ProductCards products={results} />
+        <Paginator next={next} previous={previous} props={props} />
+      </div>
+    </>
+  )
+}
+
 async function getProducts({ params, searchParams }) {
   let url = "https://psk98.pythonanywhere.com/api/products"
 
@@ -28,25 +51,13 @@ async function getProducts({ params, searchParams }) {
   }
 }
 
-export default async function Product(props) {
-  const products = await getProducts(props)
-  const { count, results, previous, next } = await products
+export async function generateMetadata({ params }) {
+  const { slug } = params
 
-  return (
-    <>
-      <div className="contained">
-        <MotionDiv
-          className={`${styles.header} header`}
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {props.params.slug}
-        </MotionDiv>
-        <Filterbar count={count} />
-        <ProductCards products={results} />
-        <Paginator next={next} previous={previous} props={props} />
-      </div>
-    </>
-  )
+  return {
+    title:
+      slug == "all"
+        ? "Shop collection | Footprints"
+        : "Shop " + slug + " | Footprints",
+  }
 }

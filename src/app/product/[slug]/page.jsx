@@ -62,3 +62,23 @@ export default async function Product({ params }) {
     )
   )
 }
+
+export async function generateMetadata({ params, searchParams }, parent) {
+  // read route params
+  const { slug } = params
+
+  // fetch data
+  const product = await fetch(
+    `https://psk98.pythonanywhere.com/api/product/?slug=${slug}`
+  ).then((res) => res.json())
+
+  // optionally access and extend (rather than replace) parent metadata
+  const previousImages = (await parent).openGraph?.images || []
+
+  return {
+    title: product.name + " | Footprints",
+    openGraph: {
+      images: [product.product_images[0], ...previousImages],
+    },
+  }
+}

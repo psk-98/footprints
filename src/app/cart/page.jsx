@@ -7,3 +7,7 @@ export default function Cart() {
     </>
   )
 }
+
+export const metadata = {
+  title: "Cart | Footprints",
+}
