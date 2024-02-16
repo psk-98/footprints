@@ -2,6 +2,7 @@ import { newest } from "@/utils/productSortTypes"
 import Image from "next/image"
 import Link from "next/link"
 import { forwardArrow } from "../../../public/svgs"
+import ProductLink from "./ProductLink"
 import styles from "./ProductSlider.module.css"
 
 export default function Slider({ header, products, link }) {
@@ -24,9 +25,10 @@ export default function Slider({ header, products, link }) {
         <div className={styles.slider}>
           {products?.map((product, i) => {
             return (
-              <Link
-                href={`product/${product?.slug}`}
-                className={styles.sliderCard}
+              <ProductLink
+                slug={product?.slug}
+                // href={`product/${product?.slug}`}
+                // className={styles.sliderCard}
                 key={product.id}
               >
                 <div className={styles.sliderImg}>
@@ -49,7 +51,7 @@ export default function Slider({ header, products, link }) {
                 <div className={styles.productPrice}>
                   R{product.price.toFixed(2)}
                 </div>
-              </Link>
+              </ProductLink>
             )
           })}
         </div>

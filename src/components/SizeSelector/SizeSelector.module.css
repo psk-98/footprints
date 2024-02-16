@@ -1,0 +1,18 @@
+.productSizes {
+  margin: 2rem 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.sizeOption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  margin: 0.5rem;
+  width: 9rem;
+  height: 3.5rem;
+  border: 1px solid #050505;
+  font-size: 2rem;
+}

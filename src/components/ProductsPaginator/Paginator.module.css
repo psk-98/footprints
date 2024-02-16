@@ -1,0 +1,24 @@
+.paginationWrapper {
+  margin: 0;
+}
+.paginationList {
+  display: flex;
+  justify-content: center;
+}
+.paginationLink {
+  list-style: none;
+  margin: 0 2.75rem;
+}
+.paginationLink svg {
+  height: 3rem;
+  opacity: 0;
+}
+.active svg {
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .paginationLink svg {
+    height: 4rem;
+  }
+}

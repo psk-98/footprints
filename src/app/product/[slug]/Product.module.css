@@ -1,3 +1,6 @@
+.productCard {
+  margin: 3rem 0 0 0;
+}
 .details {
   text-align: center;
 }
@@ -9,6 +12,10 @@
   line-height: 3rem;
 }
 @media (min-width: 768px) {
+  .productCard {
+    display: flex;
+    justify-content: space-between;
+  }
   .details {
     width: 49%;
     text-align: left;

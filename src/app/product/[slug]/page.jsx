@@ -1,4 +1,3 @@
-import Filterbar from "@/components/FilterBar/Filterbar"
 import Desc from "@/components/OtherProductDetails/Desc"
 import Images from "@/components/ProductImages/ProductImgs"
 import Slider from "@/components/ProductSlider/ProductSlider"
@@ -34,21 +33,23 @@ export default async function Product({ params }) {
     product && (
       <>
         <div className="contained">
-          <Images product={product} />
-          <div className={styles.details}>
-            <div className={styles.name}>{product?.name}</div>
-            <Link
-              href={`/products/${product?.category}`}
-              className={`${styles.category} lighter`}
-            >
-              {product?.category}
-            </Link>
-            <div className={styles.price}>R {product?.price}</div>
-            {product?.product_stock.length === 0 ? (
-              <div className={`${styles.addCart} btn`}>Sold out</div>
-            ) : (
-              <SizeSelector product={product} />
-            )}
+          <div className={styles.productCard}>
+            <Images product={product} />
+            <div className={styles.details}>
+              <div className={styles.name}>{product?.name}</div>
+              <Link
+                href={`/products/${product?.category}`}
+                className={`${styles.category} lighter`}
+              >
+                {product?.category}
+              </Link>
+              <div className={styles.price}>R {product?.price}</div>
+              {product?.product_stock.length === 0 ? (
+                <div className={`${styles.addCart} btn`}>Sold out</div>
+              ) : (
+                <SizeSelector product={product} />
+              )}
+            </div>
           </div>
           <div className={styles.productDesc}>{product?.description}</div>
           <Desc product={product} />
