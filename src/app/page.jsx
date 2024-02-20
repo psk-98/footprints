@@ -7,7 +7,7 @@ export const metadata = {
 
 async function getProducts() {
   const res = await fetch(
-    "https://psk98.pythonanywhere.com/api/products/?page_size=24&sort=-date_added"
+    `${process.env.NEXT_PUBLIC_BASE_URL}/products/?page_size=24&sort=-date_added`
   )
   const data = await res.json()
   return data.results

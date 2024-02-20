@@ -30,7 +30,7 @@ export default async function Product(props) {
 }
 
 async function getProducts({ params, searchParams }) {
-  let url = "https://psk98.pythonanywhere.com/api/products"
+  let url = `${process.env.NEXT_PUBLIC_BASE_URL}/products`
 
   console.log(searchParams)
 

@@ -9,7 +9,7 @@ import styles from "./Product.module.css"
 async function getProduct({ slug }) {
   try {
     const res = await fetch(
-      `https://psk98.pythonanywhere.com/api/product/?slug=${slug}`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/product/?slug=${slug}`
     )
     const data = await res.json()
     return data
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }, parent) {
 
   try {
     const product = await fetch(
-      `https://psk98.pythonanywhere.com/api/product/?slug=${slug}`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/product/?slug=${slug}`
     ).then((res) => res.json())
 
     const previousImages = (await parent).openGraph?.images || []
