@@ -22,7 +22,7 @@ export default function Hero() {
           where style meets comfort
         </div>
         <Link
-          href={{ pathname: "/products/all", query: { sort: newest } }}
+          href={{ pathname: "/products/all", query: { sort: newest, page: 1 } }}
           className={`${styles.shopBtn} light btn`}
         >
           Shop now

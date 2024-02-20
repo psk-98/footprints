@@ -14,7 +14,7 @@ export default function Slider({ header, products, link }) {
           <p className="header">{header}</p>
           {link && (
             <Link
-              href={{ pathname: link, query: { sort: newest } }}
+              href={{ pathname: link, query: { sort: newest, page: 1 } }}
               className={styles.sliderViewAll}
             >
               view all
@@ -25,12 +25,7 @@ export default function Slider({ header, products, link }) {
         <div className={styles.slider}>
           {products?.map((product, i) => {
             return (
-              <ProductLink
-                slug={product?.slug}
-                // href={`product/${product?.slug}`}
-                // className={styles.sliderCard}
-                key={product.id}
-              >
+              <ProductLink slug={product?.slug} key={product.id}>
                 <div className={styles.sliderImg}>
                   <Image
                     src={product.product_images[0].get_image.replace(/\s+/, "")}

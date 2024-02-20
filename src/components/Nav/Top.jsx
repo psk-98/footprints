@@ -6,7 +6,6 @@ import {
 } from "@/animations/nav"
 import { containerVariants } from "@/animations/routes"
 import { useAppSelector } from "@/store/hooks"
-import { motion } from "framer-motion"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import {
@@ -15,6 +14,7 @@ import {
   footprintsLogo,
   searchIcon,
 } from "../../../public/svgs"
+import { MotionDiv } from "../MotionComponents/MotionComponents"
 import styles from "./Nav.module.css"
 import Search from "./Search"
 
@@ -53,7 +53,7 @@ export default function NavTop({ toggle, setToggle, isSearch, setIsSearch }) {
   }, [lastScrollY])
 
   return (
-    <motion.div
+    <MotionDiv
       className={styles.navTop}
       variants={navVariants}
       animate={show || toggle || isSearch ? "none" : "transparent"}
@@ -62,7 +62,7 @@ export default function NavTop({ toggle, setToggle, isSearch, setIsSearch }) {
         <Search setIsSearch={setIsSearch} />
       ) : (
         <>
-          <motion.div
+          <MotionDiv
             className={styles.burger}
             variants={containerVariants}
             animate="visible"
@@ -71,22 +71,22 @@ export default function NavTop({ toggle, setToggle, isSearch, setIsSearch }) {
             whileTap={{ scale: 0.95 }}
             onClick={() => setToggle(!toggle)}
           >
-            <motion.div
+            <MotionDiv
               className={styles.line}
               variants={line1Variants}
               animate={toggle ? "open" : "closed"}
-            ></motion.div>
-            <motion.div
+            ></MotionDiv>
+            <MotionDiv
               className={styles.line2}
               variants={line2Variants}
               animate={toggle ? "open" : "closed"}
-            ></motion.div>
-            <motion.div
+            ></MotionDiv>
+            <MotionDiv
               className={styles.line3}
               variants={line3Variants}
               animate={toggle ? "open" : "closed"}
-            ></motion.div>
-          </motion.div>
+            ></MotionDiv>
+          </MotionDiv>
 
           <div className={styles.logo}>
             <Link href="/">{footprintsLogo}</Link>
@@ -110,6 +110,6 @@ export default function NavTop({ toggle, setToggle, isSearch, setIsSearch }) {
           </div>
         </>
       )}
-    </motion.div>
+    </MotionDiv>
   )
 }

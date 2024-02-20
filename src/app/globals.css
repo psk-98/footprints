@@ -82,6 +82,21 @@ input::-webkit-inner-spin-button {
   text-align: center;
   margin: 7rem 0;
 }
+.notFoundWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.notFoundWrapper h1 {
+  margin: 5rem 0;
+}
+.notFoundWrapper div {
+  display: flex;
+  flex-direction: column;
+  justify-content: ;
+  align-items: center;
+}
 @media (min-width: 768px) {
   * {
     font-size: 3rem;

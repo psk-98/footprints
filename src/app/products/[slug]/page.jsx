@@ -32,10 +32,13 @@ export default async function Product(props) {
 async function getProducts({ params, searchParams }) {
   let url = "https://psk98.pythonanywhere.com/api/products"
 
+  console.log(searchParams)
+
   let _params = { page_size: 12, ...searchParams }
 
-  if (params.slug !== "all" && params.slug !== "search") {
+  if ((params.slug !== "all") & (params.slug !== "search")) {
     _params.category = params.slug
+    console.log("cat")
 
     try {
       const res = await axios.get(url, { params: _params })
@@ -46,6 +49,8 @@ async function getProducts({ params, searchParams }) {
     }
   } else {
     const res = await axios.get(url, { params: _params })
+    console.log("all n search")
+
     const { data } = res
     return data
   }

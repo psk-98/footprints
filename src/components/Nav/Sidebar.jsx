@@ -1,4 +1,5 @@
 import { navLinkVariants, sidebarVariants } from "@/animations/nav"
+import { newest } from "@/utils/productSortTypes"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import styles from "./Nav.module.css"
@@ -18,7 +19,10 @@ export default function SideBar({ setToggle, toggle }) {
             key={index}
             variants={navLinkVariants}
           >
-            <Link href={item.link} onClick={() => setToggle(!toggle)}>
+            <Link
+              href={{ pathname: item.link, query: { sort: newest, page: 1 } }}
+              onClick={() => setToggle(!toggle)}
+            >
               {item.name}
             </Link>
           </motion.div>
@@ -40,9 +44,5 @@ const navItems = [
   {
     name: "Shop Men",
     link: "/products/men",
-  },
-  {
-    name: "Contact Us",
-    link: "/contact",
   },
 ]

@@ -8,7 +8,6 @@ import styles from "./SizeSelector.module.css"
 
 export default function SizeSelector({ product }) {
   const [selectedSize, setSelectedSize] = useState(null)
-  console.log(product)
   return (
     <>
       <div className={styles.productSizes}>

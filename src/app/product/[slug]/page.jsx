@@ -3,32 +3,23 @@ import Images from "@/components/ProductImages/ProductImgs"
 import Slider from "@/components/ProductSlider/ProductSlider"
 import SizeSelector from "@/components/SizeSelector/SizeSelector"
 import Link from "next/link"
+import { notFound } from "next/navigation"
 import styles from "./Product.module.css"
 
-// import { usePathname, useSearchParams } from 'next/navigation'
-// useSearchParams gives you the query params
 async function getProduct({ slug }) {
-  const res = await fetch(
-    `https://psk98.pythonanywhere.com/api/product/?slug=${slug}`
-  )
-  const data = await res.json()
-
-  return data
+  try {
+    const res = await fetch(
+      `https://psk98.pythonanywhere.com/api/product/?slug=${slug}`
+    )
+    const data = await res.json()
+    return data
+  } catch (err) {
+    notFound()
+  }
 }
 
 export default async function Product({ params }) {
-  // const createQueryString = useCallback(
-  //   (name, value) => {
-  //     const params = new URLSearchParams(searchParams)
-  //     params.set(name, value)
-
-  //     return params.toString()
-  //   },
-  //   [searchParams]
-  // )
-
   const product = await getProduct(params)
-  console.log(await product)
   return (
     product && (
       <>
@@ -63,22 +54,24 @@ export default async function Product({ params }) {
   )
 }
 
-export async function generateMetadata({ params, searchParams }, parent) {
-  // read route params
+export async function generateMetadata({ params }, parent) {
   const { slug } = params
 
-  // fetch data
-  const product = await fetch(
-    `https://psk98.pythonanywhere.com/api/product/?slug=${slug}`
-  ).then((res) => res.json())
+  try {
+    const product = await fetch(
+      `https://psk98.pythonanywhere.com/api/product/?slug=${slug}`
+    ).then((res) => res.json())
 
-  // optionally access and extend (rather than replace) parent metadata
-  const previousImages = (await parent).openGraph?.images || []
-
-  return {
-    title: product.name + " | Footprints",
-    openGraph: {
-      images: [product.product_images[0], ...previousImages],
-    },
+    const previousImages = (await parent).openGraph?.images || []
+    return {
+      title: product.name + " | Footprints",
+      openGraph: {
+        images: [product.product_images[0], ...previousImages],
+      },
+    }
+  } catch (err) {
+    return {
+      title: slug + " | Footprints",
+    }
   }
 }

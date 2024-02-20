@@ -2,11 +2,6 @@ import Link from "next/link"
 import styles from "./Paginator.module.css"
 
 export default function Paginator({ previous, next, props }) {
-  // console.log(`props: ${props}`)
-  // console.log({
-  //   ...props?.searchParams,
-  //   page: parseInt(props?.searchParams?.page) + 1,
-  // })
   return (
     <div className={styles.paginationWrapper}>
       <div className={styles.paginationNav}>
