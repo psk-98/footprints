@@ -60,9 +60,6 @@ export async function generateMetadata({ params }) {
   const { slug } = params
 
   return {
-    title:
-      slug == "all"
-        ? "Shop collection | Footprints"
-        : "Shop " + slug + " | Footprints",
+    title: slug == "all" ? "Shop collection" : "Shop " + slug,
   }
 }

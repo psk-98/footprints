@@ -2,7 +2,7 @@ import Hero from "@/components/Hero/Hero"
 import Slider from "@/components/ProductSlider/ProductSlider"
 
 export const metadata = {
-  title: "Home | Footprints",
+  title: "Home",
 }
 
 async function getProducts() {

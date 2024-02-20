@@ -64,14 +64,14 @@ export async function generateMetadata({ params }, parent) {
 
     const previousImages = (await parent).openGraph?.images || []
     return {
-      title: product.name + " | Footprints",
+      title: product.name,
       openGraph: {
         images: [product.product_images[0], ...previousImages],
       },
     }
   } catch (err) {
     return {
-      title: slug + " | Footprints",
+      title: slug,
     }
   }
 }
