@@ -32,3 +32,7 @@ export default async function NotFound() {
     </section>
   )
 }
+
+export const metadata = {
+  title: "Page Not Found 404",
+}
