@@ -3,6 +3,7 @@ import Footer from "@/components/Footer/Footer"
 import { MotionDiv } from "@/components/MotionComponents/MotionComponents"
 import Nav from "@/components/Nav/Nav"
 import { store } from "@/store/store"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Montserrat } from "next/font/google"
 import { Suspense } from "react"
 import "./globals.css"
@@ -35,7 +36,10 @@ export default function RootLayout({ children }) {
             animate="visible"
             exit="exit"
           >
-            <Suspense fallback={<Loading />}>{children}</Suspense>
+            <Suspense fallback={<Loading />}>
+              {children}
+              <SpeedInsights />
+            </Suspense>
           </MotionDiv>
           <Footer />
         </StoreProvider>
