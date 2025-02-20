@@ -74,7 +74,7 @@ const Footer = () => {
       <div className={styles.footerBottom}>
         &copy; {new Date().getFullYear()} Designed and built by
         <MotionAnchor
-          href="https://paulkhoza.netlify.app"
+          href="https://paul-khoza.netlify.app"
           target="_blank"
           rel="noreferrer"
           whileHover={{ scale: 1.3 }}
