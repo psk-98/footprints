@@ -16,7 +16,7 @@ Please note that this is a mock online store, and as such, any purchases made
 will not be processed.
 
 To see the backend click
-[here]([https://github.com/psk-98/footprints-api](https://github.com/psk-98/footprints-api))
+[here](https://github.com/psk-98/footprints-api)
 
 Thank you for visiting my online store! I hope you enjoy browsing through the
 products.
